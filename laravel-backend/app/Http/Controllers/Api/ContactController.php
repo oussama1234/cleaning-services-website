@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Services\EmailService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
+class ContactController extends Controller
+{
+    protected $emailService;
+
+    public function __construct(EmailService $emailService)
+    {
+        $this->emailService = $emailService;
+    }
+
+    /**
+     * Handle contact form submission
+     */
+    public function store(Request $request)
+    {
+        // Validate input
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:20',
+            'reason' => 'required|string|in:booking,quote,complaint,feedback,other',
+            'message' => 'required|string|max:2000',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            // Send email using Resend
+            $this->emailService->sendContactEmail($request->all());
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Message envoyé avec succès!'
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Erreur lors de l\'envoi du message',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+}
