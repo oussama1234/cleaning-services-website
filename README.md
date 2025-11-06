@@ -1,297 +1,219 @@
-# InClean - Professional Cleaning Service Landing Page
+# Cleaning Services Website - Cindel Nettoyage
 
-A pixel-perfect, fully animated one-page landing website for a professional cleaning company. Built with Next.js (App Router), Tailwind CSS, and GSAP animations.
+Professional cleaning services website built with Next.js and Laravel.
 
-## 🚀 Features
+🌐 **Live Site**: [https://cindelnettoyage.fr](https://cindelnettoyage.fr)
 
-- **Modern Tech Stack**: Next.js 14+ (App Router), React 18+, Tailwind CSS, GSAP, lucide-react
-- **Full GSAP Animations**: Timeline-based animations with ScrollTrigger for all sections
-- **Responsive Design**: Mobile-first approach, works on all devices
-- **Accessibility**: Semantic HTML, ARIA attributes, keyboard navigation, focus outlines
-- **Hero Carousel**: Auto-playing carousel with progress dots and GSAP transitions
-- **Progressive Form**: Booking form with step-by-step reveal and confetti success animation
-- **Testimonials Carousel**: Auto-playing testimonials with typewriter-like text animation
-- **Contact Forms**: Floating label animations, accessible validation
-- **Micro-interactions**: Button ripple effects, hover animations, icon movements
-- **API Routes**: Backend stubs for booking and contact form submissions
+## 🚀 Tech Stack
 
-## 📦 Installation
+### Frontend
+- **Framework**: Next.js 16 (Static Export)
+- **Styling**: Tailwind CSS
+- **Animations**: GSAP
+- **Language**: JavaScript/JSX
+
+### Backend
+- **Framework**: Laravel 12
+- **Language**: PHP 8.3
+- **Email Service**: Resend API
+- **Database**: SQLite (configurable to MySQL)
+
+## 📁 Project Structure
+
+```
+cleaning-services-website/
+├── src/                          # Next.js source code
+│   ├── app/
+│   │   ├── components/          # React components
+│   │   ├── utils/               # Utility functions
+│   │   ├── layout.tsx           # Root layout
+│   │   └── page.jsx             # Homepage
+│   └── lib/                     # Libraries
+│
+├── laravel-backend/             # Laravel API
+│   ├── app/
+│   │   ├── Http/Controllers/Api/
+│   │   │   ├── BookingController.php
+│   │   │   └── ContactController.php
+│   │   └── Services/
+│   │       └── EmailService.php
+│   ├── routes/
+│   │   ├── web.php             # API routes
+│   │   └── api.php
+│   └── config/
+│
+├── public/                      # Static assets
+│   └── images/
+│
+├── out/                         # Production build (generated)
+│
+└── Documentation files          # Deployment guides
+```
+
+## 🛠️ Setup & Installation
+
+### Prerequisites
+- Node.js 18+ and npm
+- PHP 8.1+ and Composer
+- Git
+
+### Frontend Setup
 
 ```bash
 # Install dependencies
 npm install
 
-# Run development server
+# Development server
 npm run dev
 
-# Build for production
+# Production build
 npm run build
 
-# Start production server
-npm start
-
-# Run linting
-npm run lint
+# The output will be in the /out folder
 ```
 
-## 🖼️ Image Placeholders
-
-The project requires the following images. Place them in `public/images/` directory:
-
-### Hero Carousel (3 images)
-- `hero-1.jpg` - Professional cleaning woman with cleaning supplies
-- `hero-2.jpg` - Cleaning professional in action
-- `hero-3.jpg` - Happy cleaning service provider
-
-### About Section (3 images)
-- `about-1.jpg` - Professional cleaning service
-- `about-2.jpg` - Eco-friendly cleaning products
-- `about-3.jpg` - Experienced cleaning team
-
-### Services (8 images)
-- `service-1.jpg` - Home cleaning service
-- `service-2.jpg` - Office cleaning service
-- `service-3.jpg` - Deep cleaning service
-- `service-4.jpg` - Window cleaning service
-- `service-5.jpg` - Garden/outdoor cleaning
-- `service-6.jpg` - Upholstery cleaning
-- `service-7.jpg` - Move-out cleaning
-- `service-8.jpg` - Sanitization service
-
-### Testimonials (4 avatar images)
-- `avatar-1.jpg` - Customer avatar 1
-- `avatar-2.jpg` - Customer avatar 2
-- `avatar-3.jpg` - Customer avatar 3
-- `avatar-4.jpg` - Customer avatar 4
-
-### AI Image Generation Prompt
-
-Use this prompt to generate consistent images:
-
-```
-"Photorealistic portrait of a professional cleaning woman holding a spray bottle and microfiber cloth, bright studio lighting, clean uniform with subtle company logo, neutral soft background, high resolution, natural pose, smiling, carrying cleaning supplies"
-```
-
-For service images, vary the prompt to show specific cleaning activities (office cleaning, window cleaning, etc.).
-
-## 🎨 Design System
-
-### Colors
-- **Primary**: `#0f766e` (Teal) - Main brand color
-- **Accent**: `#F59E0B` (Amber) - Call-to-action buttons
-- **Background**: `#ffffff` (White)
-- **Muted**: `#F3F4F6` (Light gray)
-- **Card**: `#F8FAFC` (Very light gray)
-
-### Typography
-- **Font**: Inter system font stack
-- **Headings**: Bold with generous line-height
-- **Body**: Regular weight, comfortable reading size
-
-### Design Principles
-- Flat design aesthetic
-- 2xl rounded corners for cards
-- Subtle shadows
-- Clean, modern, professional look
-
-## 🎬 GSAP Animations
-
-### Implementation Details
-
-All animations use GSAP for hardware-accelerated performance:
-
-1. **Hero Carousel**
-   - Slide-in animations with staggered text reveals
-   - Progress bar animations synced to autoplay timer
-   - Character-by-character heading animations
-
-2. **Scroll Animations**
-   - ScrollTrigger with `start: "top 80%"`
-   - Staggered reveals for service cards
-   - Fade-up animations for sections
-
-3. **Button Interactions**
-   - Ripple "bomb" effect on click
-   - Scale and pulse animations
-   - Hover state transitions
-
-4. **Form Animations**
-   - Progressive reveal on input completion
-   - Confetti success animation
-   - Floating label transitions
-
-### Animation Timings
-
-To adjust animation timings, look for these common patterns in component files:
-
-```javascript
-// Example timeline
-const tl = gsap.timeline();
-tl.from(element, { 
-  y: 40,                    // Adjust vertical movement
-  opacity: 0,               // Fade effect
-  duration: 0.8,            // Animation duration
-  ease: 'power3.out',       // Easing function
-  stagger: 0.15             // Delay between multiple elements
-});
-```
-
-## 📱 Sections
-
-1. **Header/Navigation** - Sticky header with blur effect and mobile menu
-2. **Hero Carousel** - Full-width carousel with autoplay and manual controls
-3. **CTA Card** - Phone call-to-action with hover animations
-4. **About Section** - Company info with feature chips and image collage
-5. **Services Grid** - 8 service cards with pricing and booking CTAs
-6. **Promo Banner** - Special offer with animated sweep effect
-7. **Pricing Plans** - 3 pricing tiers with ripple button effects
-8. **Booking Form** - Progressive microform with success animation
-9. **Testimonials** - Auto-playing carousel with ratings
-10. **Contact Section** - Contact details and animated form
-11. **Footer** - Links, newsletter signup, social icons
-
-## 🔧 Configuration
-
-### Contact Information
-
-Update contact details in the following files:
-
-- `src/app/components/Header.jsx` - Phone number in CTAs
-- `src/app/components/HeroCarousel.jsx` - Phone numbers in slides array
-- `src/app/components/CTACard.jsx` - Phone number and display
-- `src/app/components/ContactSection.jsx` - Phone, email, address
-- `src/app/components/Footer.jsx` - Footer contact info
-
-### Service Configuration
-
-Modify services in `src/app/components/ServicesGrid.jsx`:
-
-```javascript
-const services = [
-  {
-    id: 1,
-    icon: Home,
-    title: 'Service Name',
-    description: 'Service description',
-    price: '$XX - $XXX',
-    time: 'X-Xh',
-    image: '/images/service-X.jpg',
-  },
-  // ...
-];
-```
-
-### API Endpoints
-
-The booking and contact forms submit to:
-
-- `/api/book` - Booking form submissions
-- `/api/contact` - Contact form submissions
-
-Replace the stub implementations in:
-- `src/app/api/book/route.js`
-- `src/app/api/contact/route.js`
-
-**Production Integration**:
-- Add database connection (MongoDB, PostgreSQL, etc.)
-- Integrate email service (SendGrid, Resend, etc.)
-- Add SMS notifications (Twilio, etc.)
-- Connect to CRM system
-- Implement calendar/scheduling integration
-
-## ♿ Accessibility
-
-- All interactive elements are keyboard navigable
-- ARIA labels on navigation controls and form inputs
-- Semantic HTML structure (h1, h2, h3, section, nav, etc.)
-- Focus visible outlines on all interactive elements
-- Form validation with `aria-invalid` and `aria-live` regions
-- Alt text on all images
-- Proper heading hierarchy
-
-## 📦 Project Structure
-
-```
-src/
-├── app/
-│   ├── components/
-│   │   ├── Header.jsx
-│   │   ├── HeroCarousel.jsx
-│   │   ├── CTACard.jsx
-│   │   ├── AboutSection.jsx
-│   │   ├── ServiceCard.jsx
-│   │   ├── ServicesGrid.jsx
-│   │   ├── PromoBanner.jsx
-│   │   ├── PricingPlans.jsx
-│   │   ├── BookingCard.jsx
-│   │   ├── Testimonials.jsx
-│   │   ├── ContactSection.jsx
-│   │   └── Footer.jsx
-│   ├── api/
-│   │   ├── book/
-│   │   │   └── route.js
-│   │   └── contact/
-│   │       └── route.js
-│   ├── globals.css
-│   ├── layout.tsx
-│   └── page.jsx
-public/
-├── images/
-│   ├── hero-1.jpg
-│   ├── service-1.jpg
-│   ├── avatar-1.jpg
-│   └── ...
-tailwind.config.js
-package.json
-README.md
-```
-
-## 🚀 Deployment
-
-The project is ready to deploy on:
-
-- **Vercel** (recommended for Next.js)
-- **Netlify**
-- **AWS Amplify**
-- **Any Node.js hosting**
-
-### Vercel Deployment
+### Backend Setup
 
 ```bash
-# Install Vercel CLI
-npm i -g vercel
+cd laravel-backend
 
-# Deploy
-vercel
+# Install dependencies
+composer install
+
+# Copy environment file
+cp .env.example .env
+
+# Generate application key
+php artisan key:generate
+
+# Run migrations (if using database)
+php artisan migrate
+
+# Start development server
+php artisan serve
 ```
 
-## 📝 Notes
+### Environment Variables
 
-- All icons are from lucide-react (no other icon libraries used)
-- GSAP animations are hardware-accelerated (transform/opacity only)
-- Smooth scrolling is enabled globally
-- Images use Next.js Image component for optimization
-- Mobile-responsive with appropriate breakpoints
+**Frontend** (`.env.production`):
+```env
+NEXT_PUBLIC_LARAVEL_API_URL=https://cindelnettoyage.fr/api
+NEXT_PUBLIC_APP_URL=https://cindelnettoyage.fr
+```
 
-## 🔨 Development Tips
+**Backend** (`laravel-backend/.env`):
+```env
+APP_NAME="Cindel Nettoyage API"
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://cindelnettoyage.fr
 
-1. **Add New Service**: Edit `ServicesGrid.jsx` services array
-2. **Change Colors**: Update `tailwind.config.js` color values
-3. **Adjust Animations**: Modify GSAP timeline parameters in component files
-4. **Update Content**: Edit text directly in component JSX
-5. **Add Sections**: Create new component and import in `page.jsx`
+RESEND_API_KEY=your_resend_api_key
+EMAIL_FROM=onboarding@resend.dev
+EMAIL_TO=your@email.com
 
-## 📄 License
+FRONTEND_URL=https://cindelnettoyage.fr
+```
 
-This project is created for demonstration purposes. Modify and use as needed.
+## 📦 Deployment
 
-## 🤝 Support
+### cPanel Deployment (Static Site + Laravel API)
 
-For questions or issues:
-- Check component comments for animation details
-- Review GSAP documentation: https://greensock.com/docs/
-- Tailwind CSS docs: https://tailwindcss.com/docs
+1. **Build Frontend**:
+   ```bash
+   npm run build
+   ```
+
+2. **Upload Files**:
+   - Upload `out/` folder contents to `public_html/`
+   - Upload `laravel-backend/` folder to `/home/username/laravel-backend/` (outside public_html)
+
+3. **Configure Laravel**:
+   - Copy `laravel-backend/public/` to `public_html/api/` (or create symlink)
+   - Update paths in `public_html/api/index.php`
+   - Set permissions: `chmod -R 755 storage bootstrap/cache`
+
+4. **Clear Cache**:
+   ```bash
+   php artisan optimize:clear
+   ```
+
+See `CPANEL_DEPLOYMENT_GUIDE.md` for detailed instructions.
+
+## 🔧 API Endpoints
+
+### Booking Endpoint
+```
+POST /api/booking
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "phone": "+33612345678",
+  "email": "john@example.com",
+  "service": "Nettoyage de bureaux",
+  "date": "2025-11-15",
+  "time": "14:00"
+}
+```
+
+### Contact Endpoint
+```
+POST /api/contact
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "phone": "+33612345678",
+  "reason": "booking",
+  "message": "Your message here"
+}
+```
+
+## 🎨 Features
+
+- ✅ Responsive design (mobile-first)
+- ✅ Professional animations (GSAP)
+- ✅ Contact & booking forms
+- ✅ Email notifications (Resend API)
+- ✅ SEO optimized
+- ✅ Static site generation
+- ✅ CORS configured
+- ✅ Security headers
+- ✅ Cookie consent
+- ✅ Legal modals (Privacy, Terms, Cookies)
+
+## 📄 Documentation
+
+- `CPANEL_DEPLOYMENT_GUIDE.md` - Complete cPanel deployment guide
+- `DEPLOYMENT_CHECKLIST.md` - Quick deployment checklist
+- `DEPLOYMENT_ARCHITECTURE.md` - Technical architecture details
+- `FIX_DEPLOYMENT_ERRORS.md` - Troubleshooting guide
+
+## 🧪 Testing
+
+```bash
+# Run Laravel tests
+cd laravel-backend
+php artisan test
+
+# Test email functionality
+npm run test:email
+```
+
+## 📝 License
+
+Private project - All rights reserved
+
+## 👤 Author
+
+Oussama Meq
+
+## 📞 Support
+
+For support, contact: hadri.abdelmoumen@gmail.com
 
 ---
 
-**Built with ❤️ using Next.js, GSAP, and Tailwind CSS**
+**Built with ❤️ for Cindel Nettoyage**
