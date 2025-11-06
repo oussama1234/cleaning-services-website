@@ -104,12 +104,12 @@ export default function BookingCard() {
       <section id="booking" className="py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden">
         {/* Success state background */}
         <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-cyan-500/5 to-blue-500/10" />
-        <div className="absolute top-20 left-10 w-64 h-64 sm:w-96 sm:h-96 bg-gradient-to-br from-emerald-400/10 to-cyan-400/10 rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-20 right-10 w-64 h-64 sm:w-96 sm:h-96 bg-gradient-to-tl from-cyan-400/10 to-blue-400/10 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-20 left-10 w-64 h-64 sm:w-96 sm:h-96 bg-gradient-to-br from-emerald-400/10 to-cyan-400/10 rounded-full opacity-30" />
+        <div className="absolute bottom-20 right-10 w-64 h-64 sm:w-96 sm:h-96 bg-gradient-to-tl from-cyan-400/10 to-blue-400/10 rounded-full opacity-30" />
         
         <div className="relative max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary-500 to-emerald-500 rounded-2xl sm:rounded-3xl blur-xl opacity-75" />
+            <div className="absolute -inset-1 bg-gradient-to-r from-primary-500 to-emerald-500 rounded-2xl sm:rounded-3xl opacity-20" />
             <div className="relative bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl text-center">
               <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-gradient-to-br from-primary-500 to-emerald-600 rounded-full mb-4 sm:mb-6">
                 <CheckCircle2 size={32} className="text-white sm:hidden" />
@@ -158,18 +158,17 @@ export default function BookingCard() {
         {/* Dark overlay for contrast */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/30" />
         
-        {/* Animated blob decorations */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-10 w-48 h-48 sm:w-64 sm:h-64 bg-white rounded-full blur-3xl animate-float" />
-          <div className="absolute bottom-20 right-10 w-64 h-64 sm:w-96 sm:h-96 bg-white rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
-          <div className="absolute top-1/2 left-1/4 w-32 h-32 sm:w-48 sm:h-48 bg-white rounded-full blur-2xl animate-pulse-slow" />
+        {/* Simplified decorations */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-20 left-10 w-48 h-48 sm:w-64 sm:h-64 bg-white rounded-full" />
+          <div className="absolute bottom-20 right-10 w-64 h-64 sm:w-96 sm:h-96 bg-white rounded-full" />
         </div>
       </div>
 
       <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="booking-content relative text-center mb-8 sm:mb-12">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-4 sm:mb-6 border border-white/20">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full mb-4 sm:mb-6 border border-white/20">
             <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-white animate-pulse" />
             <span className="text-white/90 font-semibold uppercase text-xs sm:text-sm tracking-wide">Réservation Rapide</span>
           </div>
@@ -186,10 +185,10 @@ export default function BookingCard() {
 
         <div className="booking-content relative group z-10">
           {/* Glow effect */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-primary-500 via-emerald-500 to-cyan-500 rounded-2xl sm:rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition duration-500" />
+          <div className="absolute -inset-1 bg-gradient-to-r from-primary-500 via-emerald-500 to-cyan-500 rounded-2xl sm:rounded-3xl opacity-20 group-hover:opacity-30 transition duration-200" />
           
-          {/* Form card with glass effect */}
-          <div className="relative bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl">
+          {/* Form card */}
+          <div className="relative bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl">
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
               {/* Name */}
               <div className="relative">

@@ -63,21 +63,14 @@ export default function PricingPlans() {
       id="pricing"
       className="py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50"
     >
-      {/* Animated gradient orbs */}
-      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-gradient-to-br from-cyan-200/40 via-blue-200/30 to-purple-200/40 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-0 left-1/4 w-[600px] h-[600px] bg-gradient-to-tl from-pink-200/40 via-purple-200/30 to-cyan-200/40 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-r from-emerald-200/30 via-teal-200/20 to-cyan-200/30 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }} />
-      
-      {/* Grid pattern overlay */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: 'linear-gradient(rgba(100,100,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(100,100,255,0.05) 1px, transparent 1px)',
-        backgroundSize: '50px 50px'
-      }} />
+      {/* Simplified gradient shapes - no blur */}
+      <div className="absolute top-0 right-1/4 w-[300px] h-[300px] bg-gradient-to-br from-cyan-100/20 to-purple-100/20 rounded-full opacity-50" />
+      <div className="absolute bottom-0 left-1/4 w-[350px] h-[350px] bg-gradient-to-tl from-pink-100/20 to-cyan-100/20 rounded-full opacity-50" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-500/15 via-purple-500/15 to-pink-500/15 backdrop-blur-sm rounded-full mb-4 sm:mb-6 border border-purple-200/50">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 rounded-full mb-4 sm:mb-6 border border-purple-200">
             <Star className="w-4 h-4 text-purple-600 animate-pulse" />
             <span className="text-purple-900 font-semibold uppercase text-xs tracking-wider">Tarifs Premium</span>
           </div>
@@ -112,18 +105,18 @@ export default function PricingPlans() {
                   </div>
                 )}
 
-                {/* Animated glow effect */}
-                <div className={`absolute -inset-0.5 bg-gradient-to-r ${plan.gradient} rounded-3xl opacity-0 group-hover:opacity-30 blur transition duration-200`} />
+                {/* Simplified glow effect */}
+                <div className={`absolute -inset-0.5 bg-gradient-to-r ${plan.gradient} rounded-3xl opacity-0 group-hover:opacity-20 transition duration-200`} />
 
                 {/* Card */}
-                <div className={`relative bg-white/70 backdrop-blur-sm rounded-3xl overflow-hidden border border-gray-200/50 shadow-lg group-hover:shadow-xl transition-all duration-200 ${plan.popular ? 'md:scale-105 border-purple-300/50' : ''}`}>
+                <div className={`relative bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-lg group-hover:shadow-xl transition-all duration-200 ${plan.popular ? 'md:scale-105 border-purple-300' : ''}`}>
                   {/* Animated border gradient */}
                   <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                   
                   {/* Header with gradient */}
                   <div className={`relative bg-gradient-to-br ${plan.gradient} p-6 sm:p-8 text-white text-center overflow-hidden`}>
                     <div className="relative">
-                      <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-white/20 backdrop-blur-sm rounded-xl sm:rounded-2xl mb-3 sm:mb-4 border border-white/20 group-hover:scale-105 transition-transform duration-200">
+                      <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-white/20 rounded-xl sm:rounded-2xl mb-3 sm:mb-4 border border-white/20 group-hover:scale-105 transition-transform duration-200">
                         <Icon className="w-6 h-6 sm:w-8 sm:h-8" />
                       </div>
                       <h3 className="text-2xl sm:text-3xl font-bold mb-2 tracking-tight">{plan.name}</h3>
@@ -174,7 +167,7 @@ export default function PricingPlans() {
 
         {/* Bottom note */}
         <div className="text-center mt-10 sm:mt-12">
-          <div className="inline-block px-6 py-3 bg-white/60 backdrop-blur-sm rounded-xl border border-purple-200/50 shadow-md">
+          <div className="inline-block px-6 py-3 bg-white rounded-xl border border-purple-200 shadow-md">
             <p className="text-gray-700 text-sm font-medium">
               ✨ Tous les forfaits incluent des produits écologiques et une garantie de satisfaction à 100% 🌿
             </p>

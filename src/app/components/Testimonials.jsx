@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
-import FloatingBackground from './FloatingBackground';
 
 const testimonials = [
   {
@@ -98,8 +97,6 @@ export default function Testimonials() {
     >
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-teal-500/5 to-cyan-500/10" />
-      
-      <FloatingBackground variant="teal" />
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -121,8 +118,8 @@ export default function Testimonials() {
           opacity: isAnimating ? 0 : 1,
           transform: isAnimating ? 'scale(0.95)' : 'scale(1)',
         }}>
-          {/* Glow effect */}
-          <div className={`absolute -inset-1 bg-gradient-to-r ${current.gradient} rounded-3xl blur-xl opacity-30`} />
+            {/* Glow effect */}
+          <div className={`absolute -inset-1 bg-gradient-to-r ${current.gradient} rounded-3xl opacity-10`} />
 
           <div className="relative bg-white rounded-3xl p-8 md:p-12 shadow-card">
             {/* Quote icon - redesigned */}
@@ -134,7 +131,7 @@ export default function Testimonials() {
             <div className="flex flex-col items-center mb-6">
               {/* Avatar with real image */}
               <div className="relative group mb-4">
-                <div className={`absolute -inset-1 bg-gradient-to-br ${current.gradient} rounded-full blur-md opacity-75 group-hover:opacity-100 transition-opacity`} />
+                <div className={`absolute -inset-1 bg-gradient-to-br ${current.gradient} rounded-full opacity-20 group-hover:opacity-30 transition-opacity`} />
                 <div className="relative w-24 h-24 rounded-full overflow-hidden shadow-xl border-4 border-white">
                   <img 
                     src={current.image} 

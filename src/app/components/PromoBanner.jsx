@@ -1,7 +1,6 @@
 'use client';
 
 import { Sparkles, Zap, ArrowRight, Tag, Shield, Leaf, Percent } from 'lucide-react';
-import FloatingBackground from './FloatingBackground';
 
 export default function PromoBanner() {
 
@@ -32,13 +31,11 @@ export default function PromoBanner() {
         
         {/* Dark overlay for readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/20 to-black/10" />
-        
-        <FloatingBackground variant="emerald" />
       </div>
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full mb-4 sm:mb-6 border border-white/30 animate-slideDownFade">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full mb-4 sm:mb-6 border border-white/30 animate-slideDownFade">
           <Percent className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
           <span className="text-white font-bold uppercase text-xs sm:text-sm tracking-wider">Offre À Durée Limitée</span>
         </div>
@@ -55,7 +52,7 @@ export default function PromoBanner() {
         {/* Discount Badge */}
         <div className="inline-block mb-3 sm:mb-5 animate-bounceIn" style={{ animationDelay: '0.15s' }}>
           <div className="relative group">
-            <div className="absolute -inset-2 bg-white/30 rounded-2xl sm:rounded-3xl blur-xl animate-pulse" />
+            <div className="absolute -inset-2 bg-white/30 rounded-2xl sm:rounded-3xl opacity-50" />
             <div className="relative bg-white rounded-2xl sm:rounded-3xl px-6 py-4 sm:px-10 sm:py-6 shadow-2xl border-4 border-white/50">
               <div className="text-4xl sm:text-5xl md:text-6xl font-black bg-gradient-to-r from-cyan-500 via-blue-500 to-emerald-500 bg-clip-text text-transparent">
                 10% OFF
@@ -74,8 +71,8 @@ export default function PromoBanner() {
             const Icon = feature.icon;
             return (
               <div key={index} className="group relative">
-                <div className="absolute -inset-0.5 bg-white/40 rounded-xl blur group-hover:bg-white/60 transition-all duration-200" />
-                <div className="relative flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 bg-white/90 backdrop-blur-sm rounded-xl border border-white/50 shadow-xl group-hover:scale-105 transition-all duration-150">
+                <div className="absolute -inset-0.5 bg-white/40 rounded-xl opacity-20 group-hover:opacity-30 transition-all duration-200" />
+                <div className="relative flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 bg-white/90 rounded-xl border border-white/50 shadow-xl group-hover:scale-105 transition-all duration-150">
                   <Icon className="w-4 h-4 text-cyan-600" />
                   <span className="font-bold text-xs sm:text-sm text-gray-900">{feature.text}</span>
                 </div>
@@ -87,7 +84,7 @@ export default function PromoBanner() {
         {/* CTA Button */}
         <div className="px-4 animate-zoomIn" style={{ animationDelay: '0.3s' }}>
           <div className="relative inline-block group w-full sm:w-auto">
-            <div className="absolute -inset-1 bg-gradient-to-r from-accent-500 to-orange-600 rounded-xl blur-xl opacity-75 group-hover:opacity-100 transition-all duration-200" />
+            <div className="absolute -inset-1 bg-gradient-to-r from-accent-500 to-orange-600 rounded-xl opacity-20 group-hover:opacity-30 transition-all duration-200" />
             <button
               onClick={handleClick}
               className="relative inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-accent-500 to-orange-600 text-white rounded-xl font-bold text-base sm:text-lg overflow-hidden shadow-2xl transition-all duration-200 hover:scale-105 w-full sm:w-auto"

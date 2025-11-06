@@ -26,7 +26,7 @@ export default function ServiceCard({ service }) {
   return (
     <div className="group relative transition-transform duration-200 hover:-translate-y-3 hover:scale-[1.02]">
       {/* Glow Border */}
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-primary-500 to-emerald-500 rounded-3xl opacity-0 group-hover:opacity-75 blur transition duration-200" />
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-primary-500 to-emerald-500 rounded-3xl opacity-0 group-hover:opacity-20 transition duration-200" />
 
       {/* Card */}
       <div className="relative bg-white rounded-3xl overflow-hidden shadow-card group-hover:shadow-card-hover transition-all duration-200">

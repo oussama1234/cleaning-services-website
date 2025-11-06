@@ -1,7 +1,6 @@
 'use client';
 
 import { Home, Building2, Settings, Award, Users, Clock } from 'lucide-react';
-import FloatingBackground from './FloatingBackground';
 
 const features = [
   { icon: Home, label: 'Services Résidentiels', color: 'from-primary-500 to-emerald-600' },
@@ -33,8 +32,6 @@ export default function AboutSection() {
       
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-cyan-500/5 to-blue-500/10" />
-      
-      <FloatingBackground variant="blue" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
@@ -70,7 +67,7 @@ export default function AboutSection() {
                     className="group relative animate-rotateIn"
                     style={{ animationDelay: `${0.15 + index * 0.05}s` }}
                   >
-                    <div className={`absolute -inset-0.5 bg-gradient-to-r ${feature.color} rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-75 blur transition duration-200`} />
+                    <div className={`absolute -inset-0.5 bg-gradient-to-r ${feature.color} rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-20 transition duration-200`} />
                     <div className="relative flex items-center justify-center lg:justify-start gap-3 sm:gap-4 bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-md group-hover:shadow-lg transition-all duration-200">
                       <div className={`bg-gradient-to-br ${feature.color} p-2 sm:p-3 rounded-lg sm:rounded-xl`}>
                         <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
@@ -128,11 +125,11 @@ export default function AboutSection() {
                 <div className="absolute top-0 left-0 right-0 animate-slideDownFade" style={{ animationDelay: '0.25s' }}>
                   <div className="relative group">
                     {/* Subtle glow effect */}
-                    <div className="absolute -inset-1 bg-gradient-to-r from-accent-400/30 to-orange-500/30 rounded-t-2xl sm:rounded-t-3xl blur-xl opacity-50 group-hover:opacity-70 transition duration-200" />
+                    <div className="absolute -inset-1 bg-gradient-to-r from-accent-400/30 to-orange-500/30 rounded-t-2xl sm:rounded-t-3xl opacity-20 transition duration-200" />
                     
-                    {/* Glassy card with glassmorphism */}
-                    <div className="relative bg-white/15 backdrop-blur-xl rounded-t-2xl sm:rounded-t-3xl px-4 py-2.5 sm:px-5 sm:py-3 border-b border-white/30 shadow-lg">
-                      {/* Gradient overlay for glass effect */}
+                    {/* Card */}
+                    <div className="relative bg-white/20 rounded-t-2xl sm:rounded-t-3xl px-4 py-2.5 sm:px-5 sm:py-3 border-b border-white/30 shadow-lg">
+                      {/* Gradient overlay */}
                       <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-white/10 to-transparent rounded-t-2xl sm:rounded-t-3xl" />
                       
                       <div className="relative flex items-center justify-center gap-2 sm:gap-3">

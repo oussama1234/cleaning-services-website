@@ -63,32 +63,14 @@ export default function ContactSection() {
       {/* Light gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-50 via-blue-50 to-emerald-50" />
       
-      {/* Animated gradient orbs */}
-      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-gradient-to-br from-cyan-200/40 via-blue-200/30 to-purple-200/40 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-0 left-1/4 w-[600px] h-[600px] bg-gradient-to-tl from-emerald-200/40 via-teal-200/30 to-cyan-200/40 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-r from-blue-200/30 via-cyan-200/20 to-emerald-200/30 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }} />
-      
-      {/* Floating particles */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-2 h-2 bg-cyan-400 rounded-full opacity-60 animate-float" />
-        <div className="absolute top-40 right-20 w-3 h-3 bg-blue-400 rounded-full opacity-50 animate-float" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-60 left-1/3 w-1.5 h-1.5 bg-emerald-400 rounded-full opacity-70 animate-float" style={{ animationDelay: '2s' }} />
-        <div className="absolute bottom-40 right-1/4 w-2.5 h-2.5 bg-teal-400 rounded-full opacity-40 animate-float" style={{ animationDelay: '3s' }} />
-        <div className="absolute bottom-60 left-20 w-2 h-2 bg-cyan-500 rounded-full opacity-50 animate-float" style={{ animationDelay: '4s' }} />
-        <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-blue-500 rounded-full opacity-60 animate-float" style={{ animationDelay: '1.5s' }} />
-        <div className="absolute bottom-1/3 left-1/2 w-2 h-2 bg-emerald-500 rounded-full opacity-45 animate-float" style={{ animationDelay: '2.5s' }} />
-      </div>
-      
-      {/* Subtle grid pattern overlay */}
-      <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: 'linear-gradient(rgba(6,182,212,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(6,182,212,0.1) 1px, transparent 1px)',
-        backgroundSize: '50px 50px'
-      }} />
+      {/* Simplified gradient shapes */}
+      <div className="absolute top-0 right-1/4 w-[300px] h-[300px] bg-gradient-to-br from-cyan-100/30 to-blue-100/30 rounded-full opacity-40" />
+      <div className="absolute bottom-0 left-1/4 w-[350px] h-[350px] bg-gradient-to-tl from-emerald-100/30 to-cyan-100/30 rounded-full opacity-40" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16 animate-slideDownFade">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-500/15 via-blue-500/15 to-emerald-500/15 backdrop-blur-sm rounded-full mb-6 border border-cyan-300/50">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-100 rounded-full mb-6 border border-cyan-300">
             <MessageSquare className="w-4 h-4 text-cyan-600 animate-pulse" />
             <span className="text-cyan-900 font-bold uppercase text-xs tracking-wider">Contactez-Nous</span>
           </div>
@@ -109,8 +91,8 @@ export default function ContactSection() {
               const Icon = info.icon;
               return (
                 <div key={index} className="group relative animate-slideInLeft" style={{ animationDelay: `${index * 0.05}s` }}>
-                  <div className={`absolute -inset-0.5 bg-gradient-to-r ${info.gradient} rounded-2xl opacity-0 group-hover:opacity-20 blur transition duration-200`} />
-                  <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-md group-hover:shadow-lg transition-all duration-200 group-hover:scale-105 border border-gray-200/50 group-hover:border-cyan-300/50">
+                  <div className={`absolute -inset-0.5 bg-gradient-to-r ${info.gradient} rounded-2xl opacity-0 group-hover:opacity-15 transition duration-200`} />
+                  <div className="relative bg-white rounded-2xl p-5 shadow-md group-hover:shadow-lg transition-all duration-200 group-hover:scale-105 border border-gray-200 group-hover:border-cyan-300">
                     <div className="flex items-center gap-4">
                       <div className={`bg-gradient-to-br ${info.gradient} p-3 rounded-xl group-hover:scale-110 transition-transform duration-200`}>
                         <Icon className="w-5 h-5 text-white" />
@@ -133,7 +115,7 @@ export default function ContactSection() {
 
             {/* CTA Card */}
             <div className="relative group animate-slideInLeft" style={{ animationDelay: '0.2s' }}>
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 via-blue-400 to-emerald-400 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-200" />
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 via-blue-400 to-emerald-400 rounded-2xl opacity-15 group-hover:opacity-25 transition duration-200" />
               <div className="relative bg-gradient-to-br from-cyan-500 via-blue-500 to-emerald-500 rounded-2xl p-5 text-white shadow-lg border border-white/20 group-hover:scale-105 transition-all duration-200">
                 <h3 className="text-xl font-black mb-2">Besoin d'Aide Immédiate ?</h3>
                 <p className="text-white/95 mb-4 text-sm font-medium">Appelez-nous maintenant pour un support instantané</p>
@@ -152,11 +134,11 @@ export default function ContactSection() {
           {/* Contact Form - Right Side */}
           <div className="lg:col-span-3">
             <div className="relative group animate-slideInRight-custom" style={{ animationDelay: '0.1s' }}>
-              <div className="absolute -inset-1 bg-gradient-to-br from-cyan-200 via-blue-200 to-emerald-200 rounded-3xl opacity-20 group-hover:opacity-30 blur-xl transition duration-200" />
+              <div className="absolute -inset-1 bg-gradient-to-br from-cyan-200 via-blue-200 to-emerald-200 rounded-3xl opacity-10 group-hover:opacity-15 transition duration-200" />
               
               <form
                 onSubmit={handleSubmit}
-                className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-gray-200/50 group-hover:border-cyan-300/50 transition-all duration-200"
+                className="relative bg-white rounded-3xl p-8 shadow-lg border border-gray-200 group-hover:border-cyan-300 transition-all duration-200"
               >
                 <div className="space-y-5">
                   {/* Name */}
