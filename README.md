@@ -212,7 +212,7 @@ Oussama Meq
 
 ## 📞 Support
 
-For support, contact: hadri.abdelmoumen@gmail.com
+For support, contact: oussama.meq@gmail.com
 
 ---
 
