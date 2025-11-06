@@ -1,12 +1,7 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
 import { Home, Building2, Settings, Award, Users, Clock } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import FloatingBackground from './FloatingBackground';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const features = [
   { icon: Home, label: 'Services Résidentiels', color: 'from-primary-500 to-emerald-600' },
@@ -21,30 +16,10 @@ const stats = [
 ];
 
 export default function AboutSection() {
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from('.about-item', {
-        y: 20,
-        opacity: 0,
-        stagger: 0.08,
-        duration: 0.4,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-        },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
 
   return (
     <section
       id="about"
-      ref={sectionRef}
       className="py-24 relative overflow-hidden"
     >
       {/* Background Image */}
@@ -65,12 +40,12 @@ export default function AboutSection() {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Left Content */}
           <div className="text-center lg:text-left">
-            <div className="about-item inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-accent-50 to-orange-50 rounded-full mb-4 sm:mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-accent-50 to-orange-50 rounded-full mb-4 sm:mb-6 animate-fadeInUp">
               <Award className="w-4 h-4 sm:w-5 sm:h-5 text-accent-600" />
               <span className="text-accent-700 font-semibold uppercase text-xs sm:text-sm tracking-wide">À Propos de Nous</span>
             </div>
 
-            <h2 className="about-item text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 animate-slideUpFade" style={{ animationDelay: '0.05s' }}>
               <span className="bg-gradient-to-r from-primary-600 to-emerald-600 bg-clip-text text-transparent">
                 Entreprise de Nettoyage
               </span>
@@ -78,7 +53,7 @@ export default function AboutSection() {
               <span className="text-gray-900">Professionnelle</span>
             </h2>
 
-            <p className="about-item text-gray-600 text-base sm:text-lg mb-6 sm:mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            <p className="text-gray-600 text-base sm:text-lg mb-6 sm:mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-slideUpFade" style={{ animationDelay: '0.1s' }}>
               Nous sommes un prestataire de services de nettoyage de confiance avec plus de 2 ans d&apos;expérience. 
               Notre équipe de nettoyeurs professionnels utilise des produits écologiques et des 
               techniques avancées pour offrir des résultats exceptionnels. Que ce soit votre maison, bureau 
@@ -92,10 +67,11 @@ export default function AboutSection() {
                 return (
                   <div
                     key={index}
-                    className="about-item group relative"
+                    className="group relative animate-rotateIn"
+                    style={{ animationDelay: `${0.15 + index * 0.05}s` }}
                   >
-                    <div className={`absolute -inset-0.5 bg-gradient-to-r ${feature.color} rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-75 blur transition duration-300`} />
-                    <div className="relative flex items-center justify-center lg:justify-start gap-3 sm:gap-4 bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-md group-hover:shadow-lg transition-all duration-300">
+                    <div className={`absolute -inset-0.5 bg-gradient-to-r ${feature.color} rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-75 blur transition duration-200`} />
+                    <div className="relative flex items-center justify-center lg:justify-start gap-3 sm:gap-4 bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-md group-hover:shadow-lg transition-all duration-200">
                       <div className={`bg-gradient-to-br ${feature.color} p-2 sm:p-3 rounded-lg sm:rounded-xl`}>
                         <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                       </div>
@@ -107,7 +83,7 @@ export default function AboutSection() {
             </div>
 
             {/* Stats */}
-            <div className="about-item grid grid-cols-3 gap-3 sm:gap-6 max-w-md mx-auto lg:mx-0">
+            <div className="grid grid-cols-3 gap-3 sm:gap-6 max-w-md mx-auto lg:mx-0 animate-fadeScaleIn" style={{ animationDelay: '0.3s' }}>
               {stats.map((stat, index) => {
                 const Icon = stat.icon;
                 return (
@@ -128,7 +104,7 @@ export default function AboutSection() {
           {/* Right Side - Image Grid */}
           <div className="relative mt-8 lg:mt-0 flex justify-center">
             <div className="relative w-full">
-              <div className="about-item relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl">
+              <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl animate-zoomIn" style={{ animationDelay: '0.15s' }}>
                 {/* Background image */}
                 <img
                   src="https://images.unsplash.com/photo-1581578949510-fa7315c4c350?w=800&q=80"
@@ -149,10 +125,10 @@ export default function AboutSection() {
                 }} />
                 
                 {/* Floating Stats - At very top with matching border radius */}
-                <div className="about-item absolute top-0 left-0 right-0">
+                <div className="absolute top-0 left-0 right-0 animate-slideDownFade" style={{ animationDelay: '0.25s' }}>
                   <div className="relative group">
                     {/* Subtle glow effect */}
-                    <div className="absolute -inset-1 bg-gradient-to-r from-accent-400/30 to-orange-500/30 rounded-t-2xl sm:rounded-t-3xl blur-xl opacity-50 group-hover:opacity-70 transition duration-300" />
+                    <div className="absolute -inset-1 bg-gradient-to-r from-accent-400/30 to-orange-500/30 rounded-t-2xl sm:rounded-t-3xl blur-xl opacity-50 group-hover:opacity-70 transition duration-200" />
                     
                     {/* Glassy card with glassmorphism */}
                     <div className="relative bg-white/15 backdrop-blur-xl rounded-t-2xl sm:rounded-t-3xl px-4 py-2.5 sm:px-5 sm:py-3 border-b border-white/30 shadow-lg">

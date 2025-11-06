@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import Header from './components/Header';
 import HeroCarousel, { MobileCTACard } from './components/HeroCarousel';
 import AboutSection from './components/AboutSection';
@@ -12,8 +13,14 @@ import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import CookieConsent from './components/CookieConsent';
 import StructuredData from './components/StructuredData';
+import { initScrollAnimations } from './utils/scrollAnimations';
 
 export default function Home() {
+  // Initialize scroll-triggered animations
+  useEffect(() => {
+    const cleanup = initScrollAnimations();
+    return cleanup;
+  }, []);
 
   return (
     <>

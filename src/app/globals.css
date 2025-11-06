@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Hero carousel staggered animation */
+/* Hero carousel staggered animation - optimized */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -16,15 +16,18 @@
 
 .hero-item {
   opacity: 0;
-  animation: fadeInUp 0.4s ease-out forwards;
+}
+
+.hero-item.in-view {
+  animation: fadeInUp 0.2s ease-out forwards;
 }
 
 .hero-item:nth-child(1) { animation-delay: 0s; }
-.hero-item:nth-child(2) { animation-delay: 0.05s; }
-.hero-item:nth-child(3) { animation-delay: 0.1s; }
-.hero-item:nth-child(4) { animation-delay: 0.15s; }
-.hero-item:nth-child(5) { animation-delay: 0.2s; }
-.hero-item:nth-child(6) { animation-delay: 0.25s; }
+.hero-item:nth-child(2) { animation-delay: 0.03s; }
+.hero-item:nth-child(3) { animation-delay: 0.06s; }
+.hero-item:nth-child(4) { animation-delay: 0.09s; }
+.hero-item:nth-child(5) { animation-delay: 0.12s; }
+.hero-item:nth-child(6) { animation-delay: 0.15s; }
 
 /* Mobile menu slide-in animation */
 @keyframes slideInRight {
@@ -50,11 +53,11 @@
 }
 
 .animate-slideInRight {
-  animation: slideInRight 0.3s ease-out forwards;
+  animation: slideInRight 0.2s ease-out forwards;
 }
 
 .animate-slideOutRight {
-  animation: slideOutRight 0.3s ease-in forwards;
+  animation: slideOutRight 0.2s ease-in forwards;
 }
 
 /* Fade in up animation for scroll to top button */
@@ -70,7 +73,7 @@
 }
 
 .animate-fadeInUp {
-  animation: fadeInUp 0.4s ease-out forwards;
+  animation: fadeInUp 0.2s ease-out forwards;
 }
 
 /* Tiles fade animation for carousel */
@@ -89,7 +92,7 @@
 }
 
 .animate-tilesFade {
-  animation: tilesFade 0.6s ease-in-out forwards;
+  animation: tilesFade 0.3s ease-in-out forwards;
 }
 
 @layer base {
@@ -108,6 +111,196 @@
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* Professional Component Animations */
+
+/* Fade + Scale In - For cards and pricing */
+@keyframes fadeScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeScaleIn {
+  opacity: 0;
+}
+
+.animate-fadeScaleIn.in-view {
+  animation: fadeScaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Slide Up Fade - For sections and headers */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideUpFade {
+  opacity: 0;
+}
+
+.animate-slideUpFade.in-view {
+  animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Slide In From Left - For contact cards */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slideInLeft {
+  opacity: 0;
+}
+
+.animate-slideInLeft.in-view {
+  animation: slideInLeft 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Slide In From Right - For forms */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slideInRight-custom {
+  opacity: 0;
+}
+
+.animate-slideInRight-custom.in-view {
+  animation: slideInRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Zoom In - For testimonials and hero content */
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-zoomIn {
+  opacity: 0;
+}
+
+.animate-zoomIn.in-view {
+  animation: zoomIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Flip In - For service cards */
+@keyframes flipIn {
+  from {
+    opacity: 0;
+    transform: perspective(600px) rotateX(-15deg);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(600px) rotateX(0deg);
+  }
+}
+
+.animate-flipIn {
+  opacity: 0;
+}
+
+.animate-flipIn.in-view {
+  animation: flipIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Bounce In - For promo banner */
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-bounceIn {
+  opacity: 0;
+}
+
+.animate-bounceIn.in-view {
+  animation: bounceIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Slide Down Fade - For headers */
+@keyframes slideDownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideDownFade {
+  opacity: 0;
+}
+
+.animate-slideDownFade.in-view {
+  animation: slideDownFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Rotate In - For about section items */
+@keyframes rotateIn {
+  from {
+    opacity: 0;
+    transform: rotate(-5deg) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+.animate-rotateIn {
+  opacity: 0;
+}
+
+.animate-rotateIn.in-view {
+  animation: rotateIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Focus visible styles for accessibility */
@@ -137,9 +330,9 @@
 }
 
 .animate-fadeIn {
-  animation: fadeIn 0.3s ease-out forwards;
+  animation: fadeIn 0.15s ease-out forwards;
 }
 
 .animate-scaleIn {
-  animation: scaleIn 0.3s ease-out forwards;
+  animation: scaleIn 0.15s ease-out forwards;
 }

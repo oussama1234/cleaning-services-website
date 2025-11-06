@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone, Mail, MapPin, Clock, Sparkles, Home, Briefcase, DollarSign, MessageSquare, Send, Calendar, Info } from 'lucide-react';
-import gsap from 'gsap';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -31,7 +30,7 @@ export default function Header() {
     setTimeout(() => {
       setIsMobileMenuOpen(false);
       setIsMenuClosing(false);
-    }, 300);
+    }, 200);
   };
 
   const handleLinkClick = (e, href) => {
@@ -75,8 +74,8 @@ export default function Header() {
       </div>
 
       {/* Main Header */}
-      <header className="sticky top-0 z-50 transition-all duration-300">
-        <div className={`transition-all duration-300 ${
+      <header className="sticky top-0 z-50 transition-all duration-200">
+        <div className={`transition-all duration-200 ${
           isScrolled
             ? 'bg-gradient-to-r from-white via-gray-50 to-white backdrop-blur-xl shadow-2xl'
             : 'bg-gradient-to-r from-white/95 via-gray-50/95 to-white/95 backdrop-blur-lg shadow-lg'
@@ -88,7 +87,7 @@ export default function Header() {
                 <img 
                   src="/images/cindel-nettoyage-logo.png" 
                   alt="Cindel Nettoyage" 
-                  className="h-16 w-auto object-contain group-hover:scale-105 transition-transform"
+                  className="h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-150"
                 />
               </a>
 
@@ -101,14 +100,14 @@ export default function Header() {
                       key={link.href}
                       href={link.href}
                       onClick={(e) => handleLinkClick(e, link.href)}
-                      className="group relative px-4 py-2.5 text-gray-700 hover:text-primary-600 font-semibold rounded-xl transition-all duration-300 hover:scale-105"
+                      className="group relative px-4 py-2.5 text-gray-700 hover:text-primary-600 font-semibold rounded-xl transition-all duration-150 hover:scale-105"
                     >
                       <div className="relative z-10 flex items-center gap-2">
                         <Icon className="w-4 h-4" />
                         <span>{link.label}</span>
                       </div>
-                      <div className="absolute inset-0 bg-gradient-to-r from-primary-100 to-emerald-100 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                      <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-emerald-500 rounded-xl opacity-0 group-hover:opacity-10 blur-sm transition-opacity" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-primary-100 to-emerald-100 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-150" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-emerald-500 rounded-xl opacity-0 group-hover:opacity-10 blur-sm transition-opacity duration-150" />
                     </a>
                   );
                 })}
@@ -117,23 +116,23 @@ export default function Header() {
             {/* Mobile Menu Button - Animated Hamburger */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden relative p-3 text-gray-700 hover:text-primary-600 transition-colors z-50"
+              className="lg:hidden relative p-3 text-gray-700 hover:text-primary-600 transition-colors duration-150 z-50"
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
             >
               <div className="relative w-10 h-10 flex items-center justify-center bg-gradient-to-br from-primary-50 to-emerald-50 rounded-xl">
                 <div className="w-6 h-5 relative flex flex-col justify-between">
                   <span
-                    className={`block h-0.5 w-full bg-gray-700 rounded-full transition-all duration-300 ${
+                    className={`block h-0.5 w-full bg-gray-700 rounded-full transition-all duration-200 ${
                       isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''
                     }`}
                   />
                   <span
-                    className={`block h-0.5 w-full bg-gray-700 rounded-full transition-all duration-300 ${
+                    className={`block h-0.5 w-full bg-gray-700 rounded-full transition-all duration-200 ${
                       isMobileMenuOpen ? 'opacity-0' : 'opacity-100'
                     }`}
                   />
                   <span
-                    className={`block h-0.5 w-full bg-gray-700 rounded-full transition-all duration-300 ${
+                    className={`block h-0.5 w-full bg-gray-700 rounded-full transition-all duration-200 ${
                       isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''
                     }`}
                   />
@@ -167,14 +166,14 @@ export default function Header() {
               {/* Close Button */}
               <button
                 onClick={closeMobileMenu}
-                className="relative p-3 text-gray-700 hover:text-primary-600 transition-colors group"
+                className="relative p-3 text-gray-700 hover:text-primary-600 transition-colors duration-150 group"
                 aria-label="Close menu"
               >
-                <div className="relative w-10 h-10 flex items-center justify-center bg-gradient-to-br from-primary-50 to-emerald-50 rounded-xl group-hover:scale-110 transition-transform">
+                <div className="relative w-10 h-10 flex items-center justify-center bg-gradient-to-br from-primary-50 to-emerald-50 rounded-xl group-hover:scale-110 transition-transform duration-150">
                   <div className="w-6 h-5 relative flex flex-col justify-between">
-                    <span className="block h-0.5 w-full bg-gray-700 rounded-full rotate-45 translate-y-2 transition-all duration-300 group-hover:bg-primary-600" />
+                    <span className="block h-0.5 w-full bg-gray-700 rounded-full rotate-45 translate-y-2 transition-all duration-150 group-hover:bg-primary-600" />
                     <span className="block h-0.5 w-full bg-gray-700 rounded-full opacity-0" />
-                    <span className="block h-0.5 w-full bg-gray-700 rounded-full -rotate-45 -translate-y-2 transition-all duration-300 group-hover:bg-primary-600" />
+                    <span className="block h-0.5 w-full bg-gray-700 rounded-full -rotate-45 -translate-y-2 transition-all duration-150 group-hover:bg-primary-600" />
                   </div>
                 </div>
               </button>
@@ -191,11 +190,11 @@ export default function Header() {
                   key={link.href}
                   href={link.href}
                   onClick={(e) => handleLinkClick(e, link.href)}
-                  className="group flex items-center gap-4 px-5 py-4 text-gray-700 hover:text-white font-bold rounded-2xl transition-all duration-300 relative overflow-hidden"
+                  className="group flex items-center gap-4 px-5 py-4 text-gray-700 hover:text-white font-bold rounded-2xl transition-all duration-200 relative overflow-hidden"
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
-                  <div className="relative z-10 p-3 bg-gradient-to-br from-primary-100 to-emerald-100 rounded-xl group-hover:scale-110 transition-all shadow-md">
-                    <Icon className="w-5 h-5 text-primary-600 group-hover:text-white transition-colors" />
+                  <div className="relative z-10 p-3 bg-gradient-to-br from-primary-100 to-emerald-100 rounded-xl group-hover:scale-110 transition-all duration-150 shadow-md">
+                    <Icon className="w-5 h-5 text-primary-600 group-hover:text-white transition-colors duration-150" />
                   </div>
                   <span className="relative z-10 text-lg">{link.label}</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-emerald-600 opacity-0 group-hover:opacity-100 transition-opacity" />

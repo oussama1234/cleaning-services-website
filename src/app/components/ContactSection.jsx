@@ -1,11 +1,7 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { Phone, Mail, MapPin, Clock, Send, User, MessageSquare } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -16,41 +12,6 @@ export default function ContactSection() {
   });
   const [status, setStatus] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Header animation
-      gsap.from('.contact-header', {
-        y: 50,
-        opacity: 0,
-        scale: 0.9,
-        duration: 0.6,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 75%',
-        },
-      });
-
-      // Staggered items animation
-      gsap.from('.contact-item', {
-        y: 40,
-        opacity: 0,
-        scale: 0.95,
-        stagger: 0.12,
-        duration: 0.5,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 70%',
-        },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -97,7 +58,6 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      ref={sectionRef}
       className="py-24 relative overflow-hidden"
     >
       {/* Light gradient background */}
@@ -127,7 +87,7 @@ export default function ContactSection() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="contact-header text-center mb-16">
+        <div className="text-center mb-16 animate-slideDownFade">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-500/15 via-blue-500/15 to-emerald-500/15 backdrop-blur-sm rounded-full mb-6 border border-cyan-300/50">
             <MessageSquare className="w-4 h-4 text-cyan-600 animate-pulse" />
             <span className="text-cyan-900 font-bold uppercase text-xs tracking-wider">Contactez-Nous</span>
@@ -148,17 +108,17 @@ export default function ContactSection() {
             {contactInfo.map((info, index) => {
               const Icon = info.icon;
               return (
-                <div key={index} className="contact-item group relative">
-                  <div className={`absolute -inset-0.5 bg-gradient-to-r ${info.gradient} rounded-2xl opacity-0 group-hover:opacity-20 blur transition duration-500`} />
-                  <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-md group-hover:shadow-lg transition-all duration-500 group-hover:scale-105 border border-gray-200/50 group-hover:border-cyan-300/50">
+                <div key={index} className="group relative animate-slideInLeft" style={{ animationDelay: `${index * 0.05}s` }}>
+                  <div className={`absolute -inset-0.5 bg-gradient-to-r ${info.gradient} rounded-2xl opacity-0 group-hover:opacity-20 blur transition duration-200`} />
+                  <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-md group-hover:shadow-lg transition-all duration-200 group-hover:scale-105 border border-gray-200/50 group-hover:border-cyan-300/50">
                     <div className="flex items-center gap-4">
-                      <div className={`bg-gradient-to-br ${info.gradient} p-3 rounded-xl group-hover:scale-110 transition-transform duration-500`}>
+                      <div className={`bg-gradient-to-br ${info.gradient} p-3 rounded-xl group-hover:scale-110 transition-transform duration-200`}>
                         <Icon className="w-5 h-5 text-white" />
                       </div>
                       <div>
                         <div className="text-xs font-semibold text-gray-500 uppercase mb-1">{info.label}</div>
                         {info.href ? (
-                          <a href={info.href} className="text-base font-bold text-gray-900 hover:text-cyan-600 transition-colors duration-300">
+                          <a href={info.href} className="text-base font-bold text-gray-900 hover:text-cyan-600 transition-colors duration-150">
                             {info.value}
                           </a>
                         ) : (
@@ -172,18 +132,18 @@ export default function ContactSection() {
             })}
 
             {/* CTA Card */}
-            <div className="contact-item relative group">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 via-blue-400 to-emerald-400 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-500" />
-              <div className="relative bg-gradient-to-br from-cyan-500 via-blue-500 to-emerald-500 rounded-2xl p-5 text-white shadow-lg border border-white/20 group-hover:scale-105 transition-all duration-500">
+            <div className="relative group animate-slideInLeft" style={{ animationDelay: '0.2s' }}>
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 via-blue-400 to-emerald-400 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-200" />
+              <div className="relative bg-gradient-to-br from-cyan-500 via-blue-500 to-emerald-500 rounded-2xl p-5 text-white shadow-lg border border-white/20 group-hover:scale-105 transition-all duration-200">
                 <h3 className="text-xl font-black mb-2">Besoin d'Aide Immédiate ?</h3>
                 <p className="text-white/95 mb-4 text-sm font-medium">Appelez-nous maintenant pour un support instantané</p>
                 <a
                   href="tel:+33640604057"
-                  className="group/btn inline-flex items-center gap-2 px-5 py-2.5 bg-white text-cyan-600 rounded-xl font-bold hover:scale-110 transition-all duration-300 shadow-md relative overflow-hidden"
+                  className="group/btn inline-flex items-center gap-2 px-5 py-2.5 bg-white text-cyan-600 rounded-xl font-bold hover:scale-110 transition-all duration-150 shadow-md relative overflow-hidden"
                 >
                   <Phone className="w-4 h-4 relative z-10" />
                   <span className="relative z-10 text-sm">Appelez Maintenant</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-50 to-emerald-50 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-50 to-emerald-50 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-150" />
                 </a>
               </div>
             </div>
@@ -191,22 +151,12 @@ export default function ContactSection() {
 
           {/* Contact Form - Right Side */}
           <div className="lg:col-span-3">
-            <div className="contact-item relative group">
-              {/* Small Floating Circles in Form Background */}
-              <div className="absolute -inset-1 rounded-3xl overflow-hidden opacity-30">
-                <div className="absolute top-10 left-10 w-20 h-20 bg-cyan-400 rounded-full blur-2xl animate-float" />
-                <div className="absolute top-20 right-20 w-16 h-16 bg-blue-400 rounded-full blur-xl animate-float" style={{ animationDelay: '1s' }} />
-                <div className="absolute bottom-20 left-1/4 w-24 h-24 bg-emerald-400 rounded-full blur-2xl animate-float" style={{ animationDelay: '2s' }} />
-                <div className="absolute bottom-10 right-1/3 w-18 h-18 bg-teal-400 rounded-full blur-xl animate-float" style={{ animationDelay: '3s' }} />
-                <div className="absolute top-1/2 right-10 w-14 h-14 bg-purple-400 rounded-full blur-xl animate-pulse-slow" />
-                <div className="absolute top-1/3 left-1/3 w-12 h-12 bg-pink-400 rounded-full blur-lg animate-float" style={{ animationDelay: '1.5s' }} />
-              </div>
-              
-              <div className="absolute -inset-1 bg-gradient-to-br from-cyan-200 via-blue-200 to-emerald-200 rounded-3xl opacity-20 group-hover:opacity-30 blur-xl transition duration-700" />
+            <div className="relative group animate-slideInRight-custom" style={{ animationDelay: '0.1s' }}>
+              <div className="absolute -inset-1 bg-gradient-to-br from-cyan-200 via-blue-200 to-emerald-200 rounded-3xl opacity-20 group-hover:opacity-30 blur-xl transition duration-200" />
               
               <form
                 onSubmit={handleSubmit}
-                className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-gray-200/50 group-hover:border-cyan-300/50 transition-all duration-500"
+                className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-gray-200/50 group-hover:border-cyan-300/50 transition-all duration-200"
               >
                 <div className="space-y-5">
                   {/* Name */}
@@ -309,15 +259,15 @@ export default function ContactSection() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="group/btn relative w-full py-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-emerald-500 text-white rounded-xl font-black text-base overflow-hidden shadow-md hover:shadow-lg transition-all duration-500 hover:scale-105 disabled:opacity-50"
+                    className="group/btn relative w-full py-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-emerald-500 text-white rounded-xl font-black text-base overflow-hidden shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 disabled:opacity-50"
                   >
                     <span className="relative z-10 flex items-center justify-center gap-2">
                       {isSubmitting ? 'Envoi en cours...' : 'Envoyer le Message'}
-                      <Send className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:rotate-12 transition-transform duration-300" />
+                      <Send className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:rotate-12 transition-transform duration-150" />
                     </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-200" />
                     {/* Shine effect */}
-                    <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12" />
+                    <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-300 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12" />
                   </button>
 
                   {/* Status Message */}

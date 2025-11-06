@@ -1,11 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
 import { Check, Sparkles, Zap, Crown, ArrowRight, Star } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const plans = [
   {
@@ -58,26 +53,6 @@ const plans = [
 ];
 
 export default function PricingPlans() {
-  const sectionRef = useRef(null);
-  const cardsRef = useRef([]);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(cardsRef.current, {
-        y: 30,
-        opacity: 0,
-        stagger: 0.1,
-        duration: 0.4,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 75%',
-        },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
 
   const handleButtonClick = () => {
     document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -86,7 +61,6 @@ export default function PricingPlans() {
   return (
     <section
       id="pricing"
-      ref={sectionRef}
       className="py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50"
     >
       {/* Animated gradient orbs */}
@@ -126,8 +100,8 @@ export default function PricingPlans() {
             return (
               <div
                 key={plan.name}
-                ref={(el) => (cardsRef.current[index] = el)}
-                className="group relative"
+                className="group relative animate-fadeScaleIn"
+                style={{ animationDelay: `${index * 0.05}s` }}
               >
                 {/* Popular badge */}
                 {plan.popular && (
@@ -139,33 +113,17 @@ export default function PricingPlans() {
                 )}
 
                 {/* Animated glow effect */}
-                <div className={`absolute -inset-0.5 bg-gradient-to-r ${plan.gradient} rounded-3xl opacity-0 group-hover:opacity-30 blur transition duration-500`} />
+                <div className={`absolute -inset-0.5 bg-gradient-to-r ${plan.gradient} rounded-3xl opacity-0 group-hover:opacity-30 blur transition duration-200`} />
 
                 {/* Card */}
-                <div className={`relative bg-white/70 backdrop-blur-sm rounded-3xl overflow-hidden border border-gray-200/50 shadow-lg group-hover:shadow-xl transition-all duration-500 ${plan.popular ? 'md:scale-105 border-purple-300/50' : ''}`}>
+                <div className={`relative bg-white/70 backdrop-blur-sm rounded-3xl overflow-hidden border border-gray-200/50 shadow-lg group-hover:shadow-xl transition-all duration-200 ${plan.popular ? 'md:scale-105 border-purple-300/50' : ''}`}>
                   {/* Animated border gradient */}
-                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{
-                    background: `linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%)`,
-                    backgroundSize: '200% 200%',
-                    animation: 'shimmer 3s infinite linear'
-                  }} />
+                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                   
                   {/* Header with gradient */}
                   <div className={`relative bg-gradient-to-br ${plan.gradient} p-6 sm:p-8 text-white text-center overflow-hidden`}>
-                    {/* Animated background pattern */}
-                    <div className="absolute inset-0 opacity-10" style={{
-                      backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-                      backgroundSize: '40px 40px',
-                      animation: 'movePattern 20s linear infinite'
-                    }} />
-                    
-                    {/* Floating particles */}
-                    <div className="absolute top-0 left-0 w-1.5 h-1.5 bg-white rounded-full opacity-40 animate-float" style={{ animationDelay: '0s' }} />
-                    <div className="absolute top-1/4 right-1/4 w-1 h-1 bg-white rounded-full opacity-30 animate-float" style={{ animationDelay: '1s' }} />
-                    <div className="absolute bottom-1/3 left-1/3 w-1 h-1 bg-white rounded-full opacity-30 animate-float" style={{ animationDelay: '2s' }} />
-                    
                     <div className="relative">
-                      <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-white/20 backdrop-blur-sm rounded-xl sm:rounded-2xl mb-3 sm:mb-4 border border-white/20 group-hover:scale-105 transition-transform duration-500">
+                      <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-white/20 backdrop-blur-sm rounded-xl sm:rounded-2xl mb-3 sm:mb-4 border border-white/20 group-hover:scale-105 transition-transform duration-200">
                         <Icon className="w-6 h-6 sm:w-8 sm:h-8" />
                       </div>
                       <h3 className="text-2xl sm:text-3xl font-bold mb-2 tracking-tight">{plan.name}</h3>
@@ -178,7 +136,7 @@ export default function PricingPlans() {
                     <ul className="space-y-3 mb-6">
                       {plan.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start gap-3 group/item">
-                          <div className={`flex-shrink-0 w-5 h-5 rounded-lg border-2 border-current flex items-center justify-center group-hover/item:scale-105 transition-transform duration-300 bg-gradient-to-br ${plan.gradient} bg-clip-text text-transparent`}>
+                          <div className={`flex-shrink-0 w-5 h-5 rounded-lg border-2 border-current flex items-center justify-center group-hover/item:scale-105 transition-transform duration-150 bg-gradient-to-br ${plan.gradient} bg-clip-text text-transparent`}>
                             <Check className="w-3 h-3" strokeWidth={3} style={{ stroke: 'url(#gradient-' + idx + ')' }} />
                             <svg width="0" height="0">
                               <defs>
@@ -189,7 +147,7 @@ export default function PricingPlans() {
                               </defs>
                             </svg>
                           </div>
-                          <span className="text-gray-700 font-medium text-sm group-hover/item:text-gray-900 transition-colors duration-300">{feature}</span>
+                          <span className="text-gray-700 font-medium text-sm group-hover/item:text-gray-900 transition-colors duration-150">{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -197,15 +155,15 @@ export default function PricingPlans() {
                     {/* CTA Button */}
                     <button
                       onClick={handleButtonClick}
-                      className={`group/btn relative w-full py-3 sm:py-4 bg-gradient-to-r ${plan.gradient} text-white rounded-xl font-bold text-sm sm:text-base overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02]`}
+                      className={`group/btn relative w-full py-3 sm:py-4 bg-gradient-to-r ${plan.gradient} text-white rounded-xl font-bold text-sm sm:text-base overflow-hidden shadow-md hover:shadow-lg transition-all duration-200 hover:scale-[1.02]`}
                     >
                       <span className="relative z-10 flex items-center justify-center gap-2">
                         Demander un Devis
-                        <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                        <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-150" />
                       </span>
                       
                       {/* Shine effect */}
-                      <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12" />
+                      <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-300 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12" />
                     </button>
                   </div>
                 </div>

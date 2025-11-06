@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Phone, Sparkles, Star, Users, Award } from 'lucide-react';
-import gsap from 'gsap';
 
 const slides = [
   {
@@ -37,14 +36,14 @@ export function MobileCTACard() {
     <section className="md:hidden relative px-4 pt-8 pb-8">
       <div className="relative group max-w-7xl mx-auto">
         {/* Glow Effect */}
-        <div className="absolute -inset-1 bg-gradient-to-r from-primary-500 via-emerald-500 to-cyan-500 rounded-2xl blur-xl opacity-75 group-hover:opacity-100 transition duration-500 animate-gradient" style={{ backgroundSize: '200% 200%' }} />
+        <div className="absolute -inset-1 bg-gradient-to-r from-primary-500 via-emerald-500 to-cyan-500 rounded-2xl blur-xl opacity-75 group-hover:opacity-100 transition duration-200 animate-gradient" style={{ backgroundSize: '200% 200%' }} />
         
         {/* Main Card */}
-        <div className="relative bg-white/95 backdrop-blur-md rounded-2xl p-4 sm:p-6 shadow-card group-hover:shadow-card-hover transition-all duration-500">
+        <div className="relative bg-white/95 backdrop-blur-md rounded-2xl p-4 sm:p-6 shadow-card group-hover:shadow-card-hover transition-all duration-200">
           <div className="flex flex-col items-center gap-4">
             {/* Icon */}
             <div className="relative flex-shrink-0">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary-400 to-emerald-600 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity animate-pulse-slow" />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary-400 to-emerald-600 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-200" />
               <div className="relative bg-gradient-to-br from-primary-500 to-emerald-600 p-4 rounded-2xl shadow-glow">
                 <Phone size={32} className="text-white" />
               </div>
@@ -67,16 +66,16 @@ export function MobileCTACard() {
             {/* CTA Button */}
             <a
               href="tel:+33640604057"
-              className="group/btn relative w-full px-6 py-3 bg-gradient-to-r from-primary-500 to-emerald-600 text-white rounded-xl font-bold text-lg text-center overflow-hidden shadow-glow hover:shadow-glow-lg transition-all duration-300 hover:scale-105"
+              className="group/btn relative w-full px-6 py-3 bg-gradient-to-r from-primary-500 to-emerald-600 text-white rounded-xl font-bold text-lg text-center overflow-hidden shadow-glow hover:shadow-glow-lg transition-all duration-200 hover:scale-105"
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
-                <Phone className="w-5 h-5 group-hover/btn:rotate-12 transition-transform" />
+                <Phone className="w-5 h-5 group-hover/btn:rotate-12 transition-transform duration-150" />
                 +33 6 40 60 40 57
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-primary-500 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-primary-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-200" />
               
               {/* Shine effect */}
-              <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+              <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-500 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
             </a>
 
             {/* Trust Indicators */}
@@ -112,7 +111,7 @@ export default function HeroCarousel() {
     setTimeout(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
       setTimeout(() => setIsTransitioning(false), 50);
-    }, 400);
+    }, 200);
   };
 
   const prevSlide = () => {
@@ -123,17 +122,28 @@ export default function HeroCarousel() {
     setTimeout(() => {
       setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
       setTimeout(() => setIsTransitioning(false), 50);
-    }, 400);
+    }, 200);
   };
 
   useEffect(() => {
+    // Trigger hero animation immediately on load for all hero-items in hero section
+    const heroSection = document.querySelector('#home');
+    if (heroSection) {
+      const items = heroSection.querySelectorAll('.hero-item');
+      items.forEach(item => {
+        item.classList.add('in-view');
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    // Reset animation on slide change for text items only (not CTA card)
     if (contentRef.current) {
-      // Reset animation by removing and re-adding class
       const items = contentRef.current.querySelectorAll('.hero-item');
       items.forEach(item => {
-        item.style.animation = 'none';
+        item.classList.remove('in-view');
         setTimeout(() => {
-          item.style.animation = '';
+          item.classList.add('in-view');
         }, 10);
       });
     }
@@ -146,7 +156,7 @@ export default function HeroCarousel() {
         setTimeout(() => {
           setCurrentSlide((prev) => (prev + 1) % slides.length);
           setTimeout(() => setIsTransitioning(false), 50);
-        }, 400);
+        }, 200);
       }, 6000);
     }
 
@@ -168,11 +178,11 @@ export default function HeroCarousel() {
     >
       {/* Background Image with Gradient Overlay */}
       <div className="absolute inset-0">
-        {/* Image with fade + zoom + bounce transition */}
-        <div className={`absolute inset-0 transition-all duration-500 ${
-          isTransitioning ? 'opacity-0 scale-75' : 'opacity-100 scale-100'
+        {/* Image with fade + zoom transition */}
+        <div className={`absolute inset-0 transition-all duration-200 ${
+          isTransitioning ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
         }`} style={{
-          transitionTimingFunction: isTransitioning ? 'cubic-bezier(0.4, 0, 1, 1)' : 'cubic-bezier(0.34, 1.56, 0.64, 1)'
+          transitionTimingFunction: 'ease-out'
         }}>
           <img
             src={current.image}
@@ -182,7 +192,7 @@ export default function HeroCarousel() {
         </div>
         
         {/* Gradient Overlay for better text contrast */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${current.bg} transition-opacity duration-700 ${
+        <div className={`absolute inset-0 bg-gradient-to-br ${current.bg} transition-opacity duration-200 ${
           isTransitioning ? 'opacity-0' : 'opacity-30'
         }`} />
         
@@ -199,10 +209,10 @@ export default function HeroCarousel() {
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-4 sm:py-8">
-        <div ref={contentRef} className={`max-w-4xl mb-4 text-center sm:text-left transition-all duration-[450ms] ${
-          isTransitioning ? 'opacity-0 scale-90' : 'opacity-100 scale-100'
+        <div ref={contentRef} className={`max-w-4xl mb-4 text-center sm:text-left transition-all duration-200 ${
+          isTransitioning ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
         }`} style={{
-          transitionTimingFunction: isTransitioning ? 'cubic-bezier(0.4, 0, 1, 1)' : 'cubic-bezier(0.68, -0.55, 0.265, 1.55)'
+          transitionTimingFunction: 'ease-out'
         }}>
           {/* Eyebrow */}
           <div className="hero-item flex items-center justify-center sm:justify-start gap-2 mb-4 sm:mb-6">
@@ -226,24 +236,24 @@ export default function HeroCarousel() {
           <div className="hero-item flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center sm:justify-start">
             <a
               href={`tel:${current.phone}`}
-              className="group relative px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-primary-500 to-emerald-600 rounded-xl font-bold text-base sm:text-lg overflow-hidden shadow-2xl hover:shadow-glow-lg transition-all duration-300 hover:scale-105 w-full sm:w-auto"
+              className="group relative px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-primary-500 to-emerald-600 rounded-xl font-bold text-base sm:text-lg overflow-hidden shadow-2xl hover:shadow-glow-lg transition-all duration-200 hover:scale-105 w-full sm:w-auto"
             >
-              <span className="relative z-10 flex items-center justify-center gap-2 text-white group-hover:text-primary-600 transition-colors">
-                <Phone className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform" />
+              <span className="relative z-10 flex items-center justify-center gap-2 text-white group-hover:text-primary-600 transition-colors duration-150">
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform duration-150" />
                 Appelez-Nous
               </span>
-              <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-150" />
             </a>
 
             <button
               onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="group relative px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-accent-500 to-orange-600 text-white rounded-xl font-bold text-base sm:text-lg overflow-hidden shadow-2xl hover:shadow-accent-glow transition-all duration-300 hover:scale-105 w-full sm:w-auto"
+              className="group relative px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-accent-500 to-orange-600 text-white rounded-xl font-bold text-base sm:text-lg overflow-hidden shadow-2xl hover:shadow-accent-glow transition-all duration-200 hover:scale-105 w-full sm:w-auto"
             >
-              <span className="relative z-10 flex items-center justify-center gap-2 group-hover:text-accent-500 transition-colors">
-                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-180 transition-transform duration-500" />
+              <span className="relative z-10 flex items-center justify-center gap-2 group-hover:text-accent-500 transition-colors duration-150">
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-180 transition-transform duration-300" />
                 Demander un Devis
               </span>
-              <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-150" />
             </button>
           </div>
 
@@ -265,19 +275,19 @@ export default function HeroCarousel() {
         </div>
 
         {/* CTA Card - Hidden on mobile, shown on md+ */}
-        <div className="hero-item relative w-full mt-4 sm:mt-6 hidden md:block">
+        <div className="relative w-full mt-4 sm:mt-6 hidden md:block hero-item">
           <div className="relative group">
-            {/* Glow Effect */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary-500 via-emerald-500 to-cyan-500 rounded-2xl sm:rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition duration-500 animate-gradient" style={{ backgroundSize: '200% 200%' }} />
+          {/* Glow Effect */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-primary-500 via-emerald-500 to-cyan-500 rounded-2xl sm:rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition duration-200 animate-gradient" style={{ backgroundSize: '200% 200%' }} />
             
             {/* Main Card */}
-            <div className="relative bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-card group-hover:shadow-card-hover transition-all duration-500">
+            <div className="relative bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-card group-hover:shadow-card-hover transition-all duration-200">
               <div className="flex flex-col lg:flex-row items-center justify-between gap-4 sm:gap-6">
                 {/* Left Side */}
                 <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-4 sm:gap-6">
                   {/* Icon */}
                   <div className="relative flex-shrink-0">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary-400 to-emerald-600 rounded-2xl sm:rounded-3xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity animate-pulse-slow" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary-400 to-emerald-600 rounded-2xl sm:rounded-3xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-200" />
                     <div className="relative bg-gradient-to-br from-primary-500 to-emerald-600 p-3 sm:p-5 rounded-2xl sm:rounded-3xl shadow-glow">
                       <Phone size={32} className="text-white sm:hidden" />
                       <Phone size={40} className="text-white hidden sm:block" />
@@ -303,17 +313,17 @@ export default function HeroCarousel() {
                 <div className="flex flex-col gap-2 sm:gap-3 w-full lg:w-auto">
                   <a
                   href="tel:+33640604057"
-                    className="group/btn relative px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-primary-500 to-emerald-600 text-white rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg md:text-xl text-center overflow-hidden shadow-glow hover:shadow-glow-lg transition-all duration-300 hover:scale-105"
+                    className="group/btn relative px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-primary-500 to-emerald-600 text-white rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg md:text-xl text-center overflow-hidden shadow-glow hover:shadow-glow-lg transition-all duration-200 hover:scale-105"
                   >
                     <span className="relative z-10 flex items-center justify-center gap-2">
-                      <Phone className="w-4 h-4 sm:w-5 sm:h-5 group-hover/btn:rotate-12 transition-transform" />
+                      <Phone className="w-4 h-4 sm:w-5 sm:h-5 group-hover/btn:rotate-12 transition-transform duration-150" />
                       <span className="hidden sm:inline">+33 6 40 60 40 57</span>
                       <span className="sm:hidden">Appelez</span>
                     </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-primary-500 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-primary-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-200" />
                     
                     {/* Shine effect */}
-                    <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                    <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-500 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                   </a>
 
                   {/* Trust Indicators */}
@@ -339,36 +349,36 @@ export default function HeroCarousel() {
       <div className="md:hidden absolute bottom-16 left-0 right-0 z-20 flex justify-center gap-4">
         <button
           onClick={prevSlide}
-          className="bg-white/20 hover:bg-white/30 backdrop-blur-md p-3 rounded-full transition-all duration-300 hover:scale-110 group border border-white/30 shadow-lg"
+          className="bg-white/20 hover:bg-white/30 backdrop-blur-md p-3 rounded-full transition-all duration-200 hover:scale-110 group border border-white/30 shadow-lg"
           aria-label="Previous slide"
         >
-          <ChevronLeft className="w-5 h-5 text-white group-hover:-translate-x-1 transition-transform" />
+          <ChevronLeft className="w-5 h-5 text-white group-hover:-translate-x-1 transition-transform duration-150" />
         </button>
 
         <button
           onClick={nextSlide}
-          className="bg-white/20 hover:bg-white/30 backdrop-blur-md p-3 rounded-full transition-all duration-300 hover:scale-110 group border border-white/30 shadow-lg"
+          className="bg-white/20 hover:bg-white/30 backdrop-blur-md p-3 rounded-full transition-all duration-200 hover:scale-110 group border border-white/30 shadow-lg"
           aria-label="Next slide"
         >
-          <ChevronRight className="w-5 h-5 text-white group-hover:translate-x-1 transition-transform" />
+          <ChevronRight className="w-5 h-5 text-white group-hover:translate-x-1 transition-transform duration-150" />
         </button>
       </div>
       
       {/* Desktop: Left and Right sides */}
       <button
         onClick={prevSlide}
-        className="hidden md:block absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 backdrop-blur-md p-4 rounded-full transition-all duration-300 hover:scale-110 group border border-white/30"
+        className="hidden md:block absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 backdrop-blur-md p-4 rounded-full transition-all duration-200 hover:scale-110 group border border-white/30"
         aria-label="Previous slide"
       >
-        <ChevronLeft className="w-6 h-6 text-white group-hover:-translate-x-1 transition-transform" />
+        <ChevronLeft className="w-6 h-6 text-white group-hover:-translate-x-1 transition-transform duration-150" />
       </button>
 
       <button
         onClick={nextSlide}
-        className="hidden md:block absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 backdrop-blur-md p-4 rounded-full transition-all duration-300 hover:scale-110 group border border-white/30"
+        className="hidden md:block absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 backdrop-blur-md p-4 rounded-full transition-all duration-200 hover:scale-110 group border border-white/30"
         aria-label="Next slide"
       >
-        <ChevronRight className="w-6 h-6 text-white group-hover:translate-x-1 transition-transform" />
+        <ChevronRight className="w-6 h-6 text-white group-hover:translate-x-1 transition-transform duration-150" />
       </button>
 
       {/* Progress Indicators */}
@@ -377,7 +387,7 @@ export default function HeroCarousel() {
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`h-2 rounded-full transition-all duration-300 ${
+            className={`h-2 rounded-full transition-all duration-200 ${
               index === currentSlide ? 'w-12 bg-white' : 'w-2 bg-white/50 hover:bg-white/75'
             }`}
             aria-label={`Go to slide ${index + 1}`}

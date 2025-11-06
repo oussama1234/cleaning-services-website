@@ -1,13 +1,8 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
 import { Home, Building, Sparkles, Wind, Trees, Sofa, TruckIcon, ShieldCheck } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ServiceCard from './ServiceCard';
 import FloatingBackground from './FloatingBackground';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
@@ -96,32 +91,10 @@ const services = [
 export { services };
 
 export default function ServicesGrid() {
-  const sectionRef = useRef(null);
-  const headerRef = useRef(null);
-  const cardsRef = useRef([]);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from('.service-card', {
-        y: 20,
-        opacity: 0,
-        stagger: 0.05,
-        duration: 0.3,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 75%',
-        },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
 
   return (
     <section
       id="services"
-      ref={sectionRef}
       className="py-24 relative overflow-hidden"
     >
       {/* Gradient Overlay */}
@@ -131,7 +104,7 @@ export default function ServicesGrid() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div ref={headerRef} className="text-center mb-8 sm:mb-12 md:mb-16">
+        <div className="text-center mb-8 sm:mb-12 md:mb-16 animate-zoomIn">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-to-r from-primary-50 to-emerald-50 rounded-full mb-4 sm:mb-6">
             <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-primary-600" />
             <span className="text-primary-700 font-semibold uppercase text-xs sm:text-sm tracking-wide">Nos Services</span>
@@ -154,7 +127,8 @@ export default function ServicesGrid() {
           {services.map((service, index) => (
             <div
               key={service.id}
-              className="service-card"
+              className="animate-flipIn"
+              style={{ animationDelay: `${index * 0.03}s` }}
             >
               <ServiceCard service={service} />
             </div>
@@ -168,13 +142,13 @@ export default function ServicesGrid() {
           </p>
           <button
             onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-primary-500 to-emerald-600 text-white rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg overflow-hidden shadow-lg hover:shadow-glow transition-all duration-300 hover:scale-105 w-full sm:w-auto"
+            className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-primary-500 to-emerald-600 text-white rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg overflow-hidden shadow-lg hover:shadow-glow transition-all duration-200 hover:scale-105 w-full sm:w-auto"
           >
             <span className="relative z-10 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-180 transition-transform duration-500" />
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-180 transition-transform duration-300" />
               Demander un Devis Personnalisé
             </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-primary-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-primary-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
           </button>
         </div>
       </div>

@@ -1,12 +1,8 @@
 'use client';
 
-import { useRef } from 'react';
 import { Clock, ArrowRight, Sparkles } from 'lucide-react';
-import gsap from 'gsap';
 
 export default function ServiceCard({ service }) {
-  const cardRef = useRef(null);
-  
   // Badge color mapping
   const badgeColors = {
     emerald: { bg: 'bg-emerald-500', light: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-700' },
@@ -21,24 +17,6 @@ export default function ServiceCard({ service }) {
   
   const colors = service.badgeColor ? badgeColors[service.badgeColor] : badgeColors.emerald;
 
-  const handleHover = (isEntering) => {
-    if (isEntering) {
-      gsap.to(cardRef.current, {
-        y: -12,
-        scale: 1.02,
-        duration: 0.3,
-        ease: 'power2.out',
-      });
-    } else {
-      gsap.to(cardRef.current, {
-        y: 0,
-        scale: 1,
-        duration: 0.3,
-        ease: 'power2.out',
-      });
-    }
-  };
-
   const handleBookClick = () => {
     document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -46,24 +24,19 @@ export default function ServiceCard({ service }) {
   const Icon = service.icon;
 
   return (
-    <div
-      ref={cardRef}
-      onMouseEnter={() => handleHover(true)}
-      onMouseLeave={() => handleHover(false)}
-      className="group relative"
-    >
+    <div className="group relative transition-transform duration-200 hover:-translate-y-3 hover:scale-[1.02]">
       {/* Glow Border */}
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-primary-500 to-emerald-500 rounded-3xl opacity-0 group-hover:opacity-75 blur transition duration-500" />
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-primary-500 to-emerald-500 rounded-3xl opacity-0 group-hover:opacity-75 blur transition duration-200" />
 
       {/* Card */}
-      <div className="relative bg-white rounded-3xl overflow-hidden shadow-card group-hover:shadow-card-hover transition-all duration-500">
+      <div className="relative bg-white rounded-3xl overflow-hidden shadow-card group-hover:shadow-card-hover transition-all duration-200">
         {/* Image Header */}
         <div className="relative h-48 overflow-hidden">
           {/* Service Image */}
           <img
             src={service.image}
             alt={service.title}
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
           />
           
           {/* Subtle dark overlay for contrast */}
@@ -72,7 +45,7 @@ export default function ServiceCard({ service }) {
 
         {/* Content */}
         <div className="p-6 flex flex-col">
-          <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors h-14 flex items-center">
+          <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors duration-150 h-14 flex items-center">
             {service.title}
           </h3>
           <p className="text-gray-600 mb-6 line-clamp-3 h-18">
@@ -96,18 +69,18 @@ export default function ServiceCard({ service }) {
           {/* CTA Button */}
           <button
             onClick={handleBookClick}
-            className="group/btn relative w-full py-3 bg-gradient-to-r from-primary-500 to-emerald-600 text-white rounded-2xl font-bold overflow-hidden shadow-lg hover:shadow-glow transition-all duration-300"
+            className="group/btn relative w-full py-3 bg-gradient-to-r from-primary-500 to-emerald-600 text-white rounded-2xl font-bold overflow-hidden shadow-lg hover:shadow-glow transition-all duration-200"
           >
             <span className="relative z-10 flex items-center justify-center gap-2">
               Demander un Devis
-              <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-150" />
             </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-primary-500 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
+            <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-primary-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-200" />
           </button>
         </div>
 
         {/* Hover Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-primary-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none" />
       </div>
     </div>
   );

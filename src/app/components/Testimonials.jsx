@@ -2,11 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import FloatingBackground from './FloatingBackground';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const testimonials = [
   {
@@ -53,8 +49,9 @@ const testimonials = [
 
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [displayIndex, setDisplayIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const sectionRef = useRef(null);
+  const [isAnimating, setIsAnimating] = useState(false);
   const autoplayRef = useRef(null);
 
   useEffect(() => {
@@ -71,22 +68,16 @@ export default function Testimonials() {
     };
   }, [isPaused, currentIndex]);
 
+  // Trigger animation on index change
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from('.testimonial-item', {
-        scale: 0.98,
-        opacity: 0,
-        duration: 0.4,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-        },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+    setIsAnimating(true);
+    // Wait for fade out, then change content, then fade in
+    const timer = setTimeout(() => {
+      setDisplayIndex(currentIndex);
+      setIsAnimating(false);
+    }, 200); // Half of the transition duration for fade out
+    return () => clearTimeout(timer);
+  }, [currentIndex]);
 
   const goToNext = () => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
@@ -96,12 +87,11 @@ export default function Testimonials() {
     setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
-  const current = testimonials[currentIndex];
+  const current = testimonials[displayIndex];
 
   return (
     <section
       id="testimonials"
-      ref={sectionRef}
       className="py-16 relative overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
@@ -127,7 +117,10 @@ export default function Testimonials() {
         </div>
 
         {/* Testimonial Card */}
-        <div className="testimonial-item relative">
+        <div className="relative transition-all duration-400" style={{
+          opacity: isAnimating ? 0 : 1,
+          transform: isAnimating ? 'scale(0.95)' : 'scale(1)',
+        }}>
           {/* Glow effect */}
           <div className={`absolute -inset-1 bg-gradient-to-r ${current.gradient} rounded-3xl blur-xl opacity-30`} />
 
@@ -174,18 +167,18 @@ export default function Testimonials() {
             {/* Navigation Arrows */}
             <button
               onClick={goToPrev}
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-50 p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 group border-2 border-gray-100"
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-50 p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110 group border-2 border-gray-100"
               aria-label="Previous testimonial"
             >
-              <ChevronLeft className="w-6 h-6 text-gray-700 group-hover:-translate-x-1 transition-transform" />
+              <ChevronLeft className="w-6 h-6 text-gray-700 group-hover:-translate-x-1 transition-transform duration-150" />
             </button>
 
             <button
               onClick={goToNext}
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-50 p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 group border-2 border-gray-100"
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-50 p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110 group border-2 border-gray-100"
               aria-label="Next testimonial"
             >
-              <ChevronRight className="w-6 h-6 text-gray-700 group-hover:translate-x-1 transition-transform" />
+              <ChevronRight className="w-6 h-6 text-gray-700 group-hover:translate-x-1 transition-transform duration-150" />
             </button>
           </div>
         </div>
@@ -196,7 +189,7 @@ export default function Testimonials() {
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`h-3 rounded-full transition-all duration-300 ${
+              className={`h-3 rounded-full transition-all duration-200 ${
                 index === currentIndex 
                   ? 'w-12 bg-gradient-to-r from-primary-500 to-emerald-600' 
                   : 'w-3 bg-gray-300 hover:bg-gray-400'
