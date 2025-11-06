@@ -106,7 +106,7 @@ export default function CTACard() {
                 <div className="w-px h-4 bg-gray-300" />
                 <div className="flex items-center gap-1">
                   <Sparkles className="w-4 h-4 text-primary-500" />
-                  <span className="font-semibold">5K+ Clients</span>
+                  <span className="font-semibold">1K+ Clients</span>
                 </div>
               </div>
             </div>
