@@ -357,7 +357,7 @@ export default function HeroCarousel() {
       {/* Desktop: Left and Right sides */}
       <button
         onClick={prevSlide}
-        className="hidden md:block absolute left-4 md:left-8 top-2/3 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 backdrop-blur-md p-4 rounded-full transition-all duration-300 hover:scale-110 group border border-white/30"
+        className="hidden md:block absolute left-4 md:left-8 bottom-32 z-20 bg-white/20 hover:bg-white/30 backdrop-blur-md p-4 rounded-full transition-all duration-300 hover:scale-110 group border border-white/30"
         aria-label="Previous slide"
       >
         <ChevronLeft className="w-6 h-6 text-white group-hover:-translate-x-1 transition-transform" />
@@ -365,7 +365,7 @@ export default function HeroCarousel() {
 
       <button
         onClick={nextSlide}
-        className="hidden md:block absolute right-4 md:right-8 top-2/3 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 backdrop-blur-md p-4 rounded-full transition-all duration-300 hover:scale-110 group border border-white/30"
+        className="hidden md:block absolute right-4 md:right-8 bottom-32 z-20 bg-white/20 hover:bg-white/30 backdrop-blur-md p-4 rounded-full transition-all duration-300 hover:scale-110 group border border-white/30"
         aria-label="Next slide"
       >
         <ChevronRight className="w-6 h-6 text-white group-hover:translate-x-1 transition-transform" />
