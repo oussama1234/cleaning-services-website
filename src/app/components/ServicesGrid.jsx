@@ -1,6 +1,6 @@
 'use client';
 
-import { Home, Building, Sparkles, Wind, Trees, Sofa, TruckIcon, ShieldCheck } from 'lucide-react';
+import { Home, Building, Sparkles, Wind, Trees, Sofa, TruckIcon, ShieldCheck, ArrowRight } from 'lucide-react';
 import ServiceCard from './ServiceCard';
 
 const services = [
@@ -12,7 +12,7 @@ const services = [
     time: '2-3h',
     badge: 'Écologique',
     badgeColor: 'emerald',
-    image: '/images/home-cleaning.jpg',
+    image: '/images/residential-cleaning.png',
   },
   {
     id: 2,
@@ -22,7 +22,7 @@ const services = [
     time: '3-5h',
     badge: 'Professionnel',
     badgeColor: 'blue',
-    image: '/images/office-cleaning.jpg',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
   },
   {
     id: 3,
@@ -32,7 +32,7 @@ const services = [
     time: '4-6h',
     badge: 'En Profondeur',
     badgeColor: 'purple',
-    image: '/images/deep-cleaning.jpg',
+    image: '/images/deep-cleaning.png',
   },
   {
     id: 4,
@@ -42,7 +42,7 @@ const services = [
     time: '1-2h',
     badge: 'Service Rapide',
     badgeColor: 'cyan',
-    image: '/images/window-cleaning.jpg',
+    image: '/images/window-cleaning.png',
   },
   {
     id: 5,
@@ -52,7 +52,7 @@ const services = [
     time: '2-4h',
     badge: 'Extérieur',
     badgeColor: 'green',
-    image: '/images/garden-cleaning.jpg',
+    image: 'https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80',
   },
   {
     id: 6,
@@ -62,7 +62,7 @@ const services = [
     time: '1.5-3h',
     badge: 'Sans Taches',
     badgeColor: 'amber',
-    image: '/images/upholstery-cleaning.jpg',
+    image: 'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=800&q=80',
   },
   {
     id: 7,
@@ -72,7 +72,7 @@ const services = [
     time: '4-8h',
     badge: 'Service Complet',
     badgeColor: 'orange',
-    image: '/images/moveout-cleaning.jpg',
+    image: '/images/move-out-cleaning.png',
   },
   {
     id: 8,
@@ -82,50 +82,49 @@ const services = [
     time: '2-3h',
     badge: 'Certifié Santé',
     badgeColor: 'red',
-    image: '/images/sanitization.jpg',
+    image: 'https://images.unsplash.com/photo-1584634731339-252c581abfc5?w=800&q=80',
   },
 ];
 
-// Export services for use in Footer
 export { services };
 
 export default function ServicesGrid() {
-
   return (
-    <section
-      id="services"
-      className="py-24 relative overflow-hidden"
-    >
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-blue-500/5 to-emerald-500/10" />
+    <section id="services" className="py-24 relative overflow-hidden bg-slate-50">
+      {/* Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary-100/40 rounded-full blur-3xl -translate-y-1/2" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-secondary-100/40 rounded-full blur-3xl translate-y-1/2" />
+      </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container-width relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-8 sm:mb-12 md:mb-16 animate-zoomIn">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-to-r from-primary-50 to-emerald-50 rounded-full mb-4 sm:mb-6">
-            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-primary-600" />
-            <span className="text-primary-700 font-semibold uppercase text-xs sm:text-sm tracking-wide">Nos Services</span>
+        <div className="text-center mb-16 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm mb-6">
+            <Sparkles className="w-4 h-4 text-primary-500" />
+            <span className="text-sm font-semibold text-slate-600 uppercase tracking-wider">Nos Services</span>
           </div>
-          
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 px-4">
-            <span className="bg-gradient-to-r from-primary-600 via-emerald-600 to-primary-600 bg-clip-text text-transparent">
-              Solutions de Nettoyage Premium
+
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-slate-900 mb-6">
+            Solutions de Nettoyage <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600">
+              Sur Mesure
             </span>
           </h2>
-          
-          <p className="text-gray-600 text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed px-4">
-            Services de nettoyage professionnel adaptés à vos besoins. Des maisons aux bureaux,
-            nous offrons des résultats impeccables avec des produits écologiques.
+
+          <p className="text-lg text-slate-600 leading-relaxed">
+            Des services professionnels adaptés à vos besoins spécifiques.
+            Nous utilisons des équipements de pointe et des produits écologiques pour des résultats exceptionnels.
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
           {services.map((service, index) => (
             <div
               key={service.id}
-              className="animate-flipIn"
-              style={{ animationDelay: `${index * 0.03}s` }}
+              className="animate-slideUpFade"
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
               <ServiceCard service={service} />
             </div>
@@ -133,20 +132,24 @@ export default function ServicesGrid() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="mt-8 sm:mt-12 md:mt-16 text-center px-4">
-          <p className="text-gray-600 mb-4 sm:mb-6 text-base sm:text-lg">
-            Besoin d'un service personnalisé ? Nous pouvons vous aider !
-          </p>
-          <button
-            onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-primary-500 to-emerald-600 text-white rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg overflow-hidden shadow-lg hover:shadow-glow transition-all duration-200 hover:scale-105 w-full sm:w-auto"
-          >
-            <span className="relative z-10 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-180 transition-transform duration-300" />
-              Demander un Devis Personnalisé
-            </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-primary-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-          </button>
+        <div className="mt-20 text-center">
+          <div className="inline-flex flex-col items-center gap-6 p-8 rounded-3xl bg-white border border-slate-100 shadow-xl shadow-slate-200/50 max-w-2xl mx-auto">
+            <div className="text-center">
+              <h3 className="text-2xl font-bold text-slate-900 mb-2">Besoin d'un service spécifique ?</h3>
+              <p className="text-slate-600">Nous créons des solutions personnalisées pour chaque client.</p>
+            </div>
+
+            <button
+              onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="group relative px-8 py-4 bg-slate-900 text-white rounded-full font-bold text-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-secondary-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <span className="relative z-10 flex items-center gap-2">
+                Demander un Devis Personnalisé
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </button>
+          </div>
         </div>
       </div>
     </section>

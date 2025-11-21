@@ -2,337 +2,93 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Hero carousel staggered animation - optimized */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.hero-item {
-  opacity: 0;
-}
-
-.hero-item.in-view {
-  animation: fadeInUp 0.2s ease-out forwards;
-}
-
-.hero-item:nth-child(1) { animation-delay: 0s; }
-.hero-item:nth-child(2) { animation-delay: 0.03s; }
-.hero-item:nth-child(3) { animation-delay: 0.06s; }
-.hero-item:nth-child(4) { animation-delay: 0.09s; }
-.hero-item:nth-child(5) { animation-delay: 0.12s; }
-.hero-item:nth-child(6) { animation-delay: 0.15s; }
-
-/* Mobile menu slide-in animation */
-@keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideOutRight {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-}
-
-.animate-slideInRight {
-  animation: slideInRight 0.2s ease-out forwards;
-}
-
-.animate-slideOutRight {
-  animation: slideOutRight 0.2s ease-in forwards;
-}
-
-/* Fade in up animation for scroll to top button */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fadeInUp {
-  animation: fadeInUp 0.2s ease-out forwards;
-}
-
-/* Tiles fade animation for carousel */
-@keyframes tilesFade {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1.1);
-  }
-}
-
-.animate-tilesFade {
-  animation: tilesFade 0.3s ease-in-out forwards;
+:root {
+  --foreground-rgb: 15, 23, 42;
+  --background-start-rgb: 240, 249, 255;
+  --background-end-rgb: 224, 242, 254;
 }
 
 @layer base {
-  
   html {
     scroll-behavior: smooth;
   }
   
   body {
-    @apply bg-white text-gray-900;
-    font-feature-settings: 'rlig' 1, 'calt' 1;
+    @apply bg-slate-50 text-slate-900 font-sans antialiased selection:bg-primary-500 selection:text-white;
+    background-image: 
+      radial-gradient(circle at 15% 50%, rgba(14, 165, 233, 0.08), transparent 25%),
+      radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08), transparent 25%);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold tracking-tight;
   }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@layer components {
+  .glass-panel {
+    @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-glass;
+  }
+  
+  .glass-card {
+    @apply bg-white/60 backdrop-blur-lg border border-white/40 shadow-glass-sm hover:shadow-card-hover transition-all duration-300;
+  }
+
+  .glass-button {
+    @apply bg-white/20 backdrop-blur-md border border-white/30 hover:bg-white/30 transition-all duration-300;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-secondary-600;
+  }
+
+  .text-gradient-accent {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent-500 to-primary-500;
+  }
+
+  .container-width {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 }
 
-/* Professional Component Animations */
-
-/* Fade + Scale In - For cards and pricing */
-@keyframes fadeScaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+/* Custom Animations */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
-.animate-fadeScaleIn {
-  opacity: 0;
+.animate-float-delayed {
+  animation: float 6s ease-in-out 3s infinite;
 }
 
-.animate-fadeScaleIn.in-view {
-  animation: fadeScaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
 }
 
-/* Slide Up Fade - For sections and headers */
-@keyframes slideUpFade {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.perspective-1000 {
+  perspective: 1000px;
 }
 
-.animate-slideUpFade {
-  opacity: 0;
+.preserve-3d {
+  transform-style: preserve-3d;
 }
 
-.animate-slideUpFade.in-view {
-  animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-/* Slide In From Left - For contact cards */
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+::-webkit-scrollbar-track {
+  @apply bg-slate-100;
 }
 
-.animate-slideInLeft {
-  opacity: 0;
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 rounded-full hover:bg-slate-400 transition-colors;
 }
 
-.animate-slideInLeft.in-view {
-  animation: slideInLeft 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* Selection */
+::selection {
+  @apply bg-primary-500/30 text-primary-900;
 }
 
-/* Slide In From Right - For forms */
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.animate-slideInRight-custom {
-  opacity: 0;
-}
-
-.animate-slideInRight-custom.in-view {
-  animation: slideInRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Zoom In - For testimonials and hero content */
-@keyframes zoomIn {
-  from {
-    opacity: 0;
-    transform: scale(0.85);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.animate-zoomIn {
-  opacity: 0;
-}
-
-.animate-zoomIn.in-view {
-  animation: zoomIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Flip In - For service cards */
-@keyframes flipIn {
-  from {
-    opacity: 0;
-    transform: perspective(600px) rotateX(-15deg);
-  }
-  to {
-    opacity: 1;
-    transform: perspective(600px) rotateX(0deg);
-  }
-}
-
-.animate-flipIn {
-  opacity: 0;
-}
-
-.animate-flipIn.in-view {
-  animation: flipIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Bounce In - For promo banner */
-@keyframes bounceIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.3);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  70% {
-    opacity: 1;
-    transform: scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.animate-bounceIn {
-  opacity: 0;
-}
-
-.animate-bounceIn.in-view {
-  animation: bounceIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Slide Down Fade - For headers */
-@keyframes slideDownFade {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-slideDownFade {
-  opacity: 0;
-}
-
-.animate-slideDownFade.in-view {
-  animation: slideDownFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Rotate In - For about section items */
-@keyframes rotateIn {
-  from {
-    opacity: 0;
-    transform: rotate(-5deg) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: rotate(0deg) scale(1);
-  }
-}
-
-.animate-rotateIn {
-  opacity: 0;
-}
-
-.animate-rotateIn.in-view {
-  animation: rotateIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Focus visible styles for accessibility */
-*:focus-visible {
-  @apply outline-2 outline-offset-2 outline-primary-500;
-}
-
-/* Modal animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.15s ease-out forwards;
-}
-
-.animate-scaleIn {
-  animation: scaleIn 0.15s ease-out forwards;
-}

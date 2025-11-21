@@ -9,7 +9,7 @@ export default function StructuredData() {
     "@id": "https://cindelnettoyage.fr",
     "url": "https://cindelnettoyage.fr",
     "telephone": "+33640604057",
-    "email": "hadri.abdelmoumen@gmail.com",
+    "email": "cindelnettoyage@gmail.com",
     "priceRange": "€€",
     "address": {
       "@type": "PostalAddress",

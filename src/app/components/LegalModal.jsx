@@ -228,7 +228,7 @@ const privacyContent = {
     {
       heading: '8. Contact',
       paragraphs: [
-        'Pour toute question concernant cette politique, contactez-nous à hadri.abdelmoumen@gmail.com',
+        'Pour toute question concernant cette politique, contactez-nous à cindelnettoyage@gmail.com',
       ],
     },
   ],
@@ -307,7 +307,7 @@ const termsContent = {
     {
       heading: '10. Contact',
       paragraphs: [
-        'Pour toute question concernant ces conditions, contactez-nous à hadri.abdelmoumen@gmail.com ou appelez le +33 6 40 60 40 57.',
+        'Pour toute question concernant ces conditions, contactez-nous à cindelnettoyage@gmail.com ou appelez le +33 6 40 60 40 57.',
       ],
     },
   ],

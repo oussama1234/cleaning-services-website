@@ -1,16 +1,16 @@
 'use client';
 
 import { useState } from 'react';
-import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin, Sparkles, Home, Info, Briefcase, DollarSign, Calendar, MessageSquare, Send, ArrowRight } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin, Home, Info, Briefcase, DollarSign, MessageSquare, Send, ArrowRight } from 'lucide-react';
+import { services } from './ServicesGrid';
+import LegalModal from './LegalModal';
 
 // Custom TikTok Icon Component
 const TikTokIcon = ({ className }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/>
+    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z" />
   </svg>
 );
-import { services } from './ServicesGrid';
-import LegalModal from './LegalModal';
 
 export default function Footer() {
   const [modalType, setModalType] = useState(null);
@@ -25,30 +25,30 @@ export default function Footer() {
   ];
 
   const socialLinks = [
-    { icon: Facebook, href: 'https://facebook.com/cindelnettoyage', label: 'Facebook', gradient: 'from-blue-600 to-blue-500' },
-    { icon: Instagram, href: 'https://instagram.com/cindelnettoyage', label: 'Instagram', gradient: 'from-pink-500 to-orange-500' },
-    { icon: TikTokIcon, href: 'https://tiktok.com/@cindelnettoyage', label: 'TikTok', gradient: 'from-black to-gray-800' },
-    { icon: Linkedin, href: 'https://linkedin.com/company/cindelnettoyage', label: 'LinkedIn', gradient: 'from-blue-700 to-blue-600' },
+    { icon: Facebook, href: 'https://facebook.com/cindelnettoyage', label: 'Facebook', bg: 'bg-[#1877F2]' },
+    { icon: Instagram, href: 'https://instagram.com/cindelnettoyage', label: 'Instagram', bg: 'bg-[#E4405F]' },
+    { icon: TikTokIcon, href: 'https://tiktok.com/@cindelnettoyage', label: 'TikTok', bg: 'bg-black' },
+    { icon: Linkedin, href: 'https://linkedin.com/company/cindelnettoyage', label: 'LinkedIn', bg: 'bg-[#0A66C2]' },
   ];
 
   return (
-    <footer className="relative bg-gradient-to-b from-dark-900 to-dark-800 text-white pt-20 pb-8 overflow-hidden">
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          {/* About & Logo */}
-          <div>
-            <div className="mb-6">
-              <img 
-                src="/images/cindel-nettoyage-logo.png" 
-                alt="Cindel Nettoyage" 
-                className="h-16 w-auto object-contain mb-4"
-              />
-            </div>
-            <p className="text-gray-400 leading-relaxed mb-6">
-              Services de nettoyage professionnels avec produits écologiques et équipe expérimentée. Votre satisfaction est notre priorité.
-            </p>
+    <footer className="relative bg-slate-900 text-white pt-24 pb-12 overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black/20 to-transparent" />
+      </div>
 
-            {/* Social Links */}
+      <div className="container-width relative z-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+          {/* Brand Column */}
+          <div className="space-y-6">
+            <div className="flex items-center gap-3">
+              <img src="/images/cindel-nettoyage-logo.png" alt="Cindel Nettoyage" className="h-12 w-auto" />
+            </div>
+            <p className="text-slate-400 leading-relaxed">
+              Votre partenaire de confiance pour un environnement propre et sain. Services professionnels adaptés à vos besoins.
+            </p>
             <div className="flex gap-3">
               {socialLinks.map((social, index) => {
                 const Icon = social.icon;
@@ -58,13 +58,10 @@ export default function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative"
+                    className={`w-10 h-10 rounded-xl flex items-center justify-center ${social.bg} hover:scale-110 transition-transform duration-300 shadow-lg`}
                     aria-label={social.label}
                   >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${social.gradient} rounded-xl blur opacity-0 group-hover:opacity-75 transition duration-300`} />
-                    <div className={`relative bg-gradient-to-br ${social.gradient} p-3 rounded-xl group-hover:scale-110 transition-transform`}>
-                      <Icon className="w-5 h-5 text-white" />
-                    </div>
+                    <Icon className="w-5 h-5 text-white" />
                   </a>
                 );
               })}
@@ -73,20 +70,19 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
-              <div className="w-1 h-6 bg-gradient-to-b from-primary-500 to-emerald-600 rounded-full" />
-              Liens Rapides
+            <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
+              <span className="w-8 h-1 bg-primary-500 rounded-full" />
+              Navigation
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-4">
               {quickLinks.map((link, index) => {
                 const Icon = link.icon;
                 return (
                   <li key={index}>
-                    <a
-                      href={link.href}
-                      className="text-gray-400 hover:text-white transition-colors duration-200 flex items-center gap-2 group"
-                    >
-                      <Icon className="w-4 h-4" />
+                    <a href={link.href} className="flex items-center gap-3 text-slate-400 hover:text-white hover:translate-x-1 transition-all duration-300 group">
+                      <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-primary-500/20 transition-colors">
+                        <Icon className="w-4 h-4 group-hover:text-primary-400 transition-colors" />
+                      </div>
                       {link.label}
                     </a>
                   </li>
@@ -97,74 +93,87 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
-              <div className="w-1 h-6 bg-gradient-to-b from-accent-500 to-orange-600 rounded-full" />
+            <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
+              <span className="w-8 h-1 bg-secondary-500 rounded-full" />
               Nos Services
             </h3>
-            <ul className="space-y-3 text-gray-400">
-              {services.map((service, index) => (
-                <li key={index} className="hover:text-white transition-colors cursor-pointer flex items-center gap-2 group">
-                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                  {service.title}
+            <ul className="space-y-3">
+              {services.slice(0, 6).map((service, index) => (
+                <li key={index}>
+                  <a href="#services" className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group">
+                    <ArrowRight className="w-4 h-4 text-secondary-500 group-hover:translate-x-1 transition-transform" />
+                    {service.title}
+                  </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* Contact */}
           <div>
-            <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
-              <div className="w-1 h-6 bg-gradient-to-b from-blue-500 to-cyan-600 rounded-full" />
-              Contactez-Nous
+            <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
+              <span className="w-8 h-1 bg-accent-500 rounded-full" />
+              Contact
             </h3>
-            <div className="space-y-4">
-              <a href="tel:+33640604057" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
-                <Phone className="w-5 h-5" />
-                +33 6 40 60 40 57
-              </a>
-              <a href="mailto:hadri.abdelmoumen@gmail.com" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
-                <Mail className="w-5 h-5" />
-                hadri.abdelmoumen@gmail.com
-              </a>
-              <div className="flex items-center gap-3 text-gray-400">
-                <MapPin className="w-5 h-5" />
-                115 Avenue Saint Vincent De Paul, Dax
-              </div>
-            </div>
+            <ul className="space-y-4">
+              <li>
+                <a href="tel:+33640604057" className="flex items-start gap-4 text-slate-400 hover:text-white transition-colors group">
+                  <div className="p-2 rounded-lg bg-white/5 group-hover:bg-primary-500/20 transition-colors">
+                    <Phone className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-0.5">Téléphone</div>
+                    <div className="font-medium">+33 6 40 60 40 57</div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="mailto:cindelnettoyage@gmail.com" className="flex items-start gap-4 text-slate-400 hover:text-white transition-colors group">
+                  <div className="p-2 rounded-lg bg-white/5 group-hover:bg-primary-500/20 transition-colors">
+                    <Mail className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-0.5">Email</div>
+                    <div className="font-medium">cindelnettoyage@gmail.com</div>
+                  </div>
+                </a>
+              </li>
+              <li className="flex items-start gap-4 text-slate-400">
+                <div className="p-2 rounded-lg bg-white/5">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-0.5">Adresse</div>
+                  <div className="font-medium">115 Avenue Saint Vincent De Paul, Dax</div>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-400 text-sm text-center md:text-left">
-            © {new Date().getFullYear()} Cindel Nettoyage. Tous droits réservés. Fait avec
-            <span className="text-red-500 mx-1">♥</span>
-            pour des espaces plus propres.
+          <p className="text-slate-500 text-sm text-center md:text-left">
+            © {new Date().getFullYear()} Cindel Nettoyage. Tous droits réservés.
           </p>
-          <div className="flex gap-6 text-sm">
-            <button 
-              onClick={() => {
-                console.log('Opening privacy modal');
-                setModalType('privacy');
-              }}
-              className="text-gray-400 hover:text-white transition-colors cursor-pointer"
+          <div className="flex gap-6 text-sm font-medium">
+            <button
+              onClick={() => setModalType('privacy')}
+              className="text-slate-400 hover:text-white transition-colors"
             >
               Politique de Confidentialité
             </button>
-            <button 
-              onClick={() => {
-                console.log('Opening terms modal');
-                setModalType('terms');
-              }}
-              className="text-gray-400 hover:text-white transition-colors cursor-pointer"
+            <button
+              onClick={() => setModalType('terms')}
+              className="text-slate-400 hover:text-white transition-colors"
             >
-              Conditions d&apos;Utilisation
+              Conditions d'Utilisation
             </button>
           </div>
         </div>
       </div>
-      
-      <LegalModal 
+
+      <LegalModal
         isOpen={modalType !== null}
         onClose={() => setModalType(null)}
         type={modalType}

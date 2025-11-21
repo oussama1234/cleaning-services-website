@@ -1,148 +1,142 @@
 'use client';
 
-import { Home, Building2, Settings, Award, Users, Clock } from 'lucide-react';
+import { Home, Building2, Settings, Award, Users, Clock, CheckCircle2 } from 'lucide-react';
 
 const features = [
-  { icon: Home, label: 'Services Résidentiels', color: 'from-primary-500 to-emerald-600' },
-  { icon: Building2, label: 'Services Commerciaux', color: 'from-blue-500 to-cyan-600' },
-  { icon: Settings, label: 'Solutions Personnalisées', color: 'from-accent-500 to-orange-600' },
+  {
+    icon: Home,
+    label: 'Services Résidentiels',
+    description: 'Nettoyage complet pour votre maison',
+    color: 'text-primary-500',
+    bg: 'bg-primary-50'
+  },
+  {
+    icon: Building2,
+    label: 'Services Commerciaux',
+    description: 'Solutions pour bureaux et commerces',
+    color: 'text-secondary-500',
+    bg: 'bg-secondary-50'
+  },
+  {
+    icon: Settings,
+    label: 'Solutions Sur Mesure',
+    description: 'Adapté à vos besoins spécifiques',
+    color: 'text-accent-500',
+    bg: 'bg-accent-50'
+  },
 ];
 
 const stats = [
-  { icon: Users, value: '1000+', label: 'Clients Satisfaits' },
-  { icon: Award, value: '2+', label: "Ans d'Expérience" },
-  { icon: Clock, value: '24/7', label: 'Support' },
+  { value: '1000+', label: 'Clients Satisfaits' },
+  { value: '2+', label: "Ans d'Expérience" },
+  { value: '24/7', label: 'Support Client' },
 ];
 
 export default function AboutSection() {
-
   return (
-    <section
-      id="about"
-      className="py-24 relative overflow-hidden"
-    >
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <img 
-          src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1920&q=80" 
-          alt="" 
-          className="w-full h-full object-cover opacity-5"
-        />
-      </div>
-      
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-cyan-500/5 to-blue-500/10" />
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+    <section id="about" className="py-24 relative overflow-hidden bg-white">
+      {/* Background Elements */}
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-primary-50/50 to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-1/3 h-full bg-gradient-to-r from-secondary-50/50 to-transparent pointer-events-none" />
+
+      <div className="container-width relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left Content */}
-          <div className="text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-accent-50 to-orange-50 rounded-full mb-4 sm:mb-6 animate-fadeInUp">
-              <Award className="w-4 h-4 sm:w-5 sm:h-5 text-accent-600" />
-              <span className="text-accent-700 font-semibold uppercase text-xs sm:text-sm tracking-wide">À Propos de Nous</span>
+          <div className="relative">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 border border-slate-200 mb-6">
+              <Award className="w-4 h-4 text-slate-600" />
+              <span className="text-sm font-semibold text-slate-600 uppercase tracking-wider">À Propos de Nous</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 animate-slideUpFade" style={{ animationDelay: '0.05s' }}>
-              <span className="bg-gradient-to-r from-primary-600 to-emerald-600 bg-clip-text text-transparent">
-                Entreprise de Nettoyage
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-slate-900 mb-6 leading-tight">
+              L'Excellence du Nettoyage <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600">
+                Professionnel
               </span>
-              <br />
-              <span className="text-gray-900">Professionnelle</span>
             </h2>
 
-            <p className="text-gray-600 text-base sm:text-lg mb-6 sm:mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-slideUpFade" style={{ animationDelay: '0.1s' }}>
-              Nous sommes un prestataire de services de nettoyage de confiance avec plus de 2 ans d&apos;expérience. 
-              Notre équipe de nettoyeurs professionnels utilise des produits écologiques et des 
-              techniques avancées pour offrir des résultats exceptionnels. Que ce soit votre maison, bureau 
-              ou espace commercial, nous nous engageons à le rendre impeccable.
+            <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+              Nous sommes bien plus qu'une simple entreprise de nettoyage. Nous sommes vos partenaires pour créer des environnements sains, propres et accueillants. Avec une équipe dévouée et des standards de qualité élevés, nous transformons chaque espace.
             </p>
 
-            {/* Feature Cards */}
-            <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8 max-w-2xl mx-auto lg:mx-0">
+            {/* Features List */}
+            <div className="space-y-6 mb-10">
               {features.map((feature, index) => {
                 const Icon = feature.icon;
                 return (
-                  <div
-                    key={index}
-                    className="group relative animate-rotateIn"
-                    style={{ animationDelay: `${0.15 + index * 0.05}s` }}
-                  >
-                    <div className={`absolute -inset-0.5 bg-gradient-to-r ${feature.color} rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-20 transition duration-200`} />
-                    <div className="relative flex items-center justify-center lg:justify-start gap-3 sm:gap-4 bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-md group-hover:shadow-lg transition-all duration-200">
-                      <div className={`bg-gradient-to-br ${feature.color} p-2 sm:p-3 rounded-lg sm:rounded-xl`}>
-                        <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                      </div>
-                      <span className="font-semibold text-gray-800 text-base sm:text-lg">{feature.label}</span>
+                  <div key={index} className="flex items-start gap-4 group">
+                    <div className={`p-3 rounded-2xl ${feature.bg} group-hover:scale-110 transition-transform duration-300`}>
+                      <Icon className={`w-6 h-6 ${feature.color}`} />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-primary-600 transition-colors">
+                        {feature.label}
+                      </h3>
+                      <p className="text-slate-500 text-sm">
+                        {feature.description}
+                      </p>
                     </div>
                   </div>
                 );
               })}
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-3 sm:gap-6 max-w-md mx-auto lg:mx-0 animate-fadeScaleIn" style={{ animationDelay: '0.3s' }}>
-              {stats.map((stat, index) => {
-                const Icon = stat.icon;
-                return (
-                  <div key={index} className="text-center flex flex-col items-center">
-                    <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-primary-500 to-emerald-600 rounded-lg sm:rounded-xl mb-2">
-                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                    </div>
-                    <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-primary-600 to-emerald-600 bg-clip-text text-transparent mb-1 whitespace-nowrap">
-                      {stat.value}
-                    </div>
-                    <div className="text-xs sm:text-sm text-gray-600 h-8 sm:h-10 flex items-center justify-center text-center px-1">{stat.label}</div>
+            {/* Stats Grid */}
+            <div className="grid grid-cols-3 gap-6 border-t border-slate-100 pt-8">
+              {stats.map((stat, index) => (
+                <div key={index} className="text-center lg:text-left">
+                  <div className="text-3xl font-display font-bold text-slate-900 mb-1">
+                    {stat.value}
                   </div>
-                );
-              })}
+                  <div className="text-sm font-medium text-slate-500 uppercase tracking-wide">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Right Side - Image Grid */}
-          <div className="relative mt-8 lg:mt-0 flex justify-center">
-            <div className="relative w-full">
-              <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl animate-zoomIn" style={{ animationDelay: '0.15s' }}>
-                {/* Background image */}
-                <img
-                  src="https://images.unsplash.com/photo-1581578949510-fa7315c4c350?w=800&q=80"
-                  alt="Cleaning service"
-                  className="w-full h-full object-cover aspect-[4/3]"
-                />
-                {/* Overlay with text */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary-500/50 to-emerald-600/50 flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <div className="text-4xl sm:text-5xl md:text-6xl font-bold mb-2 sm:mb-4">2+</div>
-                    <div className="text-lg sm:text-xl md:text-2xl">Années d&apos;Excellence</div>
+          {/* Right Image Composition */}
+          <div className="relative lg:h-[600px] flex items-center justify-center">
+            {/* Main Image */}
+            <div className="relative z-10 w-full max-w-md aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
+              <img
+                src="https://images.unsplash.com/photo-1581578949510-fa7315c4c350?w=800&q=80"
+                alt="Cleaning Professional"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+
+              {/* Floating Badge */}
+              <div className="absolute bottom-8 left-8 right-8 bg-white/90 backdrop-blur-md p-6 rounded-3xl shadow-lg border border-white/50">
+                <div className="flex items-center gap-4">
+                  <div className="p-3 bg-emerald-100 rounded-full">
+                    <CheckCircle2 className="w-6 h-6 text-emerald-600" />
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-slate-900">100%</div>
+                    <div className="text-sm text-slate-600 font-medium">Satisfaction Garantie</div>
                   </div>
                 </div>
-                {/* Pattern overlay */}
-                <div className="absolute inset-0 opacity-10" style={{
-                  backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-                  backgroundSize: '30px 30px'
-                }} />
-                
-                {/* Floating Stats - At very top with matching border radius */}
-                <div className="absolute top-0 left-0 right-0 animate-slideDownFade" style={{ animationDelay: '0.25s' }}>
-                  <div className="relative group">
-                    {/* Subtle glow effect */}
-                    <div className="absolute -inset-1 bg-gradient-to-r from-accent-400/30 to-orange-500/30 rounded-t-2xl sm:rounded-t-3xl opacity-20 transition duration-200" />
-                    
-                    {/* Card */}
-                    <div className="relative bg-white/20 rounded-t-2xl sm:rounded-t-3xl px-4 py-2.5 sm:px-5 sm:py-3 border-b border-white/30 shadow-lg">
-                      {/* Gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-white/10 to-transparent rounded-t-2xl sm:rounded-t-3xl" />
-                      
-                      <div className="relative flex items-center justify-center gap-2 sm:gap-3">
-                        <div className="bg-gradient-to-br from-accent-500 to-orange-600 p-1.5 sm:p-2 rounded-lg shadow-lg flex-shrink-0">
-                          <Award className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                        </div>
-                        <div className="flex items-center gap-1.5 sm:gap-2">
-                          <span className="text-sm sm:text-base font-bold text-white drop-shadow-2xl whitespace-nowrap">100%</span>
-                          <span className="text-sm sm:text-base font-semibold text-white/95 drop-shadow-lg whitespace-nowrap">Taux de Satisfaction</span>
-                        </div>
-                      </div>
+              </div>
+            </div>
+
+            {/* Decorative Elements */}
+            <div className="absolute top-1/4 -right-12 w-72 h-72 bg-primary-200/30 rounded-full blur-3xl -z-10 animate-blob" />
+            <div className="absolute bottom-1/4 -left-12 w-72 h-72 bg-secondary-200/30 rounded-full blur-3xl -z-10 animate-blob animation-delay-2000" />
+
+            {/* Floating Card */}
+            <div className="absolute top-20 -left-8 z-20 bg-white p-4 rounded-2xl shadow-xl animate-float">
+              <div className="flex items-center gap-3">
+                <div className="flex -space-x-3">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="w-10 h-10 rounded-full border-2 border-white overflow-hidden bg-slate-200">
+                      <img src={`https://randomuser.me/api/portraits/women/${i + 40}.jpg`} alt="User" className="w-full h-full object-cover" />
                     </div>
-                  </div>
+                  ))}
+                </div>
+                <div className="text-xs font-bold text-slate-900">
+                  Équipe <br /> Experte
                 </div>
               </div>
             </div>

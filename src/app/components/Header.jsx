@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Menu, X, Phone, Mail, MapPin, Clock, Sparkles, Home, Briefcase, DollarSign, MessageSquare, Send, Calendar, Info } from 'lucide-react';
+import { Menu, X, Phone, Mail, MapPin, Clock, Sparkles, Home, Briefcase, DollarSign, MessageSquare, Send, Calendar, Info, ChevronRight } from 'lucide-react';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -19,7 +19,7 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -38,7 +38,7 @@ export default function Header() {
     closeMobileMenu();
     const element = document.querySelector(href);
     if (element) {
-      const offset = 140;
+      const offset = 100;
       const elementPosition = element.offsetTop - offset;
       window.scrollTo({ top: elementPosition, behavior: 'smooth' });
     }
@@ -47,52 +47,53 @@ export default function Header() {
   return (
     <>
       {/* Top Info Bar */}
-      <div className="bg-gradient-to-r from-primary-600 to-emerald-500 text-white py-2 sm:py-3 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xKSIvPjwvc3ZnPg==')] opacity-50" />
+      <div className="bg-slate-900 text-white py-2 relative overflow-hidden z-50">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary-900/50 to-secondary-900/50" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-wrap items-center justify-center sm:justify-between gap-2 sm:gap-4 text-xs sm:text-sm">
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6">
-              <a href="tel:+33640604057" className="flex items-center gap-1.5 sm:gap-2 hover:text-primary-100 transition-colors group">
-                <div className="bg-white/20 p-1 sm:p-1.5 rounded-lg group-hover:bg-white/30 transition-colors">
-                  <Phone className="w-3 h-3 sm:w-4 sm:h-4" />
-                </div>
-                <span className="font-medium text-xs sm:text-sm">+33 6 40 60 40 57</span>
+          <div className="flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm">
+            <div className="flex items-center gap-6">
+              <a href="tel:+33640604057" className="flex items-center gap-2 hover:text-primary-300 transition-colors group">
+                <Phone className="w-3.5 h-3.5 text-primary-400 group-hover:scale-110 transition-transform" />
+                <span className="font-medium">+33 6 40 60 40 57</span>
               </a>
-              <a href="mailto:hadri.abdelmoumen@gmail.com" className="flex items-center gap-1.5 sm:gap-2 hover:text-primary-100 transition-colors group">
-                <div className="bg-white/20 p-1 sm:p-1.5 rounded-lg group-hover:bg-white/30 transition-colors">
-                  <Mail className="w-3 h-3 sm:w-4 sm:h-4" />
-                </div>
-                <span className="font-medium text-xs sm:text-sm">hadri.abdelmoumen@gmail.com</span>
+              <a href="mailto:cindelnettoyage@gmail.com" className="flex items-center gap-2 hover:text-primary-300 transition-colors group">
+                <Mail className="w-3.5 h-3.5 text-primary-400 group-hover:scale-110 transition-transform" />
+                <span className="font-medium">cindelnettoyage@gmail.com</span>
               </a>
             </div>
-            <div className="hidden sm:flex items-center gap-1.5 sm:gap-2">
-              <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span className="font-medium text-xs sm:text-sm">Support 24/7 Disponible</span>
+            <div className="hidden sm:flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="font-medium text-emerald-400">Disponible 24/7</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Header */}
-      <header className="sticky top-0 z-50 transition-all duration-200">
-        <div className={`transition-all duration-200 ${
-          isScrolled
-            ? 'bg-gradient-to-r from-white via-gray-50 to-white backdrop-blur-xl shadow-2xl'
-            : 'bg-gradient-to-r from-white/95 via-gray-50/95 to-white/95 backdrop-blur-lg shadow-lg'
-        }`}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header
+        className={`fixed w-full top-0 z-40 transition-all duration-300 ${isScrolled ? 'top-0' : 'top-8 sm:top-10'
+          }`}
+      >
+        <div className={`mx-auto transition-all duration-300 ${isScrolled
+          ? 'max-w-full bg-white/80 backdrop-blur-xl border-b border-white/20 shadow-glass'
+          : 'max-w-7xl mt-4 rounded-2xl bg-white/70 backdrop-blur-lg border border-white/40 shadow-glass-sm mx-4'
+          }`}>
+          <div className="px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-20">
               {/* Logo */}
-              <a href="#home" className="flex items-center group" aria-label="Home">
-                <img 
-                  src="/images/cindel-nettoyage-logo.png" 
-                  alt="Cindel Nettoyage" 
-                  className="h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-150"
-                />
+              <a href="#home" className="flex items-center gap-3 group" aria-label="Home">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity" />
+                  <img
+                    src="/images/cindel-nettoyage-logo.png"
+                    alt="Cindel Nettoyage"
+                    className="h-12 w-auto relative z-10 object-contain"
+                  />
+                </div>
               </a>
 
-              {/* Desktop Navigation - Right aligned */}
-              <nav className="hidden lg:flex items-center space-x-2 ml-auto" aria-label="Main navigation">
+              {/* Desktop Navigation */}
+              <nav className="hidden lg:flex items-center gap-1">
                 {navLinks.map((link) => {
                   const Icon = link.icon;
                   return (
@@ -100,109 +101,89 @@ export default function Header() {
                       key={link.href}
                       href={link.href}
                       onClick={(e) => handleLinkClick(e, link.href)}
-                      className="group relative px-4 py-2.5 text-gray-700 hover:text-primary-600 font-semibold rounded-xl transition-all duration-150 hover:scale-105"
+                      className="relative px-4 py-2 text-slate-600 hover:text-primary-600 font-medium rounded-full transition-all duration-300 group overflow-hidden"
                     >
-                      <div className="relative z-10 flex items-center gap-2">
-                        <Icon className="w-4 h-4" />
-                        <span>{link.label}</span>
-                      </div>
-                      <div className="absolute inset-0 bg-gradient-to-r from-primary-100 to-emerald-100 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-150" />
-                      <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-emerald-500 rounded-xl opacity-0 group-hover:opacity-10 blur-sm transition-opacity duration-150" />
+                      <span className="relative z-10 flex items-center gap-2">
+                        <Icon className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                        <span className="group-hover:translate-x-1 transition-transform duration-300">{link.label}</span>
+                      </span>
+                      <div className="absolute inset-0 bg-primary-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </a>
                   );
                 })}
+                <a
+                  href="#contact"
+                  onClick={(e) => handleLinkClick(e, '#contact')}
+                  className="ml-4 px-6 py-2.5 bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-semibold rounded-full shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40 hover:scale-105 transition-all duration-300 flex items-center gap-2"
+                >
+                  <span>Devis Gratuit</span>
+                  <ChevronRight className="w-4 h-4" />
+                </a>
               </nav>
 
-            {/* Mobile Menu Button - Animated Hamburger */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden relative p-3 text-gray-700 hover:text-primary-600 transition-colors duration-150 z-50"
-              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-            >
-              <div className="relative w-10 h-10 flex items-center justify-center bg-gradient-to-br from-primary-50 to-emerald-50 rounded-xl">
-                <div className="w-6 h-5 relative flex flex-col justify-between">
-                  <span
-                    className={`block h-0.5 w-full bg-gray-700 rounded-full transition-all duration-200 ${
-                      isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''
-                    }`}
-                  />
-                  <span
-                    className={`block h-0.5 w-full bg-gray-700 rounded-full transition-all duration-200 ${
-                      isMobileMenuOpen ? 'opacity-0' : 'opacity-100'
-                    }`}
-                  />
-                  <span
-                    className={`block h-0.5 w-full bg-gray-700 rounded-full transition-all duration-200 ${
-                      isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''
-                    }`}
-                  />
-                </div>
-              </div>
-            </button>
-            </div>
-          </div>
-        </div>
-        
-        {/* Bottom gradient border */}
-        <div className="h-0.5 bg-gradient-to-r from-primary-400 via-emerald-400 to-cyan-400 shadow-md" />
-      </header>
-
-      {/* Mobile Menu Full Screen Overlay */}
-      {isMobileMenuOpen && (
-        <div className={`lg:hidden fixed inset-0 z-[60] bg-gradient-to-br from-white via-gray-50 to-white overflow-y-auto ${isMenuClosing ? 'animate-slideOutRight' : 'animate-slideInRight'}`}>
-          {/* Fixed Header with Logo and Close */}
-          <div className="sticky top-0 bg-white/95 backdrop-blur-lg shadow-lg z-10">
-            <div className="h-1 bg-gradient-to-r from-primary-500 via-emerald-500 to-cyan-500 shadow-glow" />
-            <div className="flex justify-between items-center px-4 sm:px-6 h-20">
-              {/* Logo */}
-              <a href="#home" onClick={(e) => handleLinkClick(e, '#home')} className="flex items-center group">
-                <img 
-                  src="/images/cindel-nettoyage-logo.png" 
-                  alt="Cindel Nettoyage" 
-                  className="h-16 w-auto object-contain"
-                />
-              </a>
-              
-              {/* Close Button */}
+              {/* Mobile Menu Button */}
               <button
-                onClick={closeMobileMenu}
-                className="relative p-3 text-gray-700 hover:text-primary-600 transition-colors duration-150 group"
-                aria-label="Close menu"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="lg:hidden relative p-2 text-slate-600 hover:text-primary-600 transition-colors"
+                aria-label="Toggle menu"
               >
-                <div className="relative w-10 h-10 flex items-center justify-center bg-gradient-to-br from-primary-50 to-emerald-50 rounded-xl group-hover:scale-110 transition-transform duration-150">
-                  <div className="w-6 h-5 relative flex flex-col justify-between">
-                    <span className="block h-0.5 w-full bg-gray-700 rounded-full rotate-45 translate-y-2 transition-all duration-150 group-hover:bg-primary-600" />
-                    <span className="block h-0.5 w-full bg-gray-700 rounded-full opacity-0" />
-                    <span className="block h-0.5 w-full bg-gray-700 rounded-full -rotate-45 -translate-y-2 transition-all duration-150 group-hover:bg-primary-600" />
-                  </div>
+                <div className="w-6 h-6 flex flex-col justify-center gap-1.5">
+                  <span className={`block h-0.5 w-6 bg-current rounded-full transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+                  <span className={`block h-0.5 w-4 bg-current rounded-full transition-all duration-300 ml-auto ${isMobileMenuOpen ? 'opacity-0' : ''}`} />
+                  <span className={`block h-0.5 w-6 bg-current rounded-full transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
                 </div>
               </button>
             </div>
-            <div className="h-0.5 bg-gradient-to-r from-primary-400 via-emerald-400 to-cyan-400" />
           </div>
-          
-          {/* Menu Content */}
-          <nav className="px-4 py-8 space-y-2 max-w-md mx-auto">
-            {navLinks.map((link, index) => {
-              const Icon = link.icon;
-              return (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => handleLinkClick(e, link.href)}
-                  className="group flex items-center gap-4 px-5 py-4 text-gray-700 hover:text-white font-bold rounded-2xl transition-all duration-200 relative overflow-hidden"
-                  style={{ animationDelay: `${index * 50}ms` }}
-                >
-                  <div className="relative z-10 p-3 bg-gradient-to-br from-primary-100 to-emerald-100 rounded-xl group-hover:scale-110 transition-all duration-150 shadow-md">
-                    <Icon className="w-5 h-5 text-primary-600 group-hover:text-white transition-colors duration-150" />
-                  </div>
-                  <span className="relative z-10 text-lg">{link.label}</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-emerald-600 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-emerald-600 opacity-0 group-hover:opacity-20 blur-xl transition-opacity" />
-                </a>
-              );
-            })}
-          </nav>
+        </div>
+      </header>
+
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div className={`lg:hidden fixed inset-0 z-50 bg-white/95 backdrop-blur-xl ${isMenuClosing ? 'animate-slideOutRight' : 'animate-slideInRight'}`}>
+          <div className="flex flex-col h-full">
+            <div className="flex justify-between items-center p-6 border-b border-slate-100">
+              <span className="text-xl font-display font-bold text-slate-800">Menu</span>
+              <button
+                onClick={closeMobileMenu}
+                className="p-2 text-slate-500 hover:text-slate-800 transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            <nav className="flex-1 overflow-y-auto p-6 space-y-2">
+              {navLinks.map((link, index) => {
+                const Icon = link.icon;
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={(e) => handleLinkClick(e, link.href)}
+                    className="flex items-center gap-4 p-4 rounded-2xl hover:bg-slate-50 transition-all duration-300 group"
+                    style={{ animationDelay: `${index * 50}ms` }}
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-primary-50 flex items-center justify-center text-primary-600 group-hover:bg-primary-600 group-hover:text-white transition-all duration-300 shadow-sm">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <span className="text-lg font-medium text-slate-700 group-hover:text-slate-900">{link.label}</span>
+                    <ChevronRight className="w-5 h-5 ml-auto text-slate-300 group-hover:text-primary-600 transition-colors" />
+                  </a>
+                );
+              })}
+            </nav>
+
+            <div className="p-6 border-t border-slate-100 bg-slate-50/50">
+              <a
+                href="#contact"
+                onClick={(e) => handleLinkClick(e, '#contact')}
+                className="flex items-center justify-center gap-2 w-full py-4 bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-bold rounded-xl shadow-lg shadow-primary-500/25 active:scale-95 transition-all duration-300"
+              >
+                <span>Demander un Devis</span>
+                <ChevronRight className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
         </div>
       )}
     </>

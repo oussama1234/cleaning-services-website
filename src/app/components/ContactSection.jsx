@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, Send, User, MessageSquare } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Send, User, MessageSquare, ArrowRight } from 'lucide-react';
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -9,6 +9,7 @@ export default function ContactSection() {
     email: '',
     phone: '',
     message: '',
+    reason: ''
   });
   const [status, setStatus] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -24,20 +25,19 @@ export default function ContactSection() {
     setStatus('');
 
     try {
-      // Use Laravel API directly
       const apiUrl = process.env.NEXT_PUBLIC_LARAVEL_API_URL || 'https://cindelnettoyage.fr/api';
       const response = await fetch(`${apiUrl}/contact`, {
         method: 'POST',
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
-        body: JSON.stringify({ ...formData, reason: 'other' }),
+        body: JSON.stringify({ ...formData }),
       });
 
       if (response.ok) {
         setStatus('success');
-        setFormData({ name: '', email: '', phone: '', message: '' });
+        setFormData({ name: '', email: '', phone: '', message: '', reason: '' });
       } else {
         setStatus('error');
       }
@@ -49,224 +49,192 @@ export default function ContactSection() {
   };
 
   const contactInfo = [
-    { icon: Clock, label: 'Support 24/7', value: 'Disponible 24/7', gradient: 'from-primary-500 to-emerald-600' },
-    { icon: Phone, label: 'Téléphone', value: '+33 6 40 60 40 57', href: 'tel:+33640604057', gradient: 'from-blue-500 to-cyan-600' },
-    { icon: Mail, label: 'Email', value: 'hadri.abdelmoumen@gmail.com', href: 'mailto:hadri.abdelmoumen@gmail.com', gradient: 'from-accent-500 to-orange-600' },
-    { icon: MapPin, label: 'Adresse', value: '115 Avenue Saint Vincent De Paul, Dax', gradient: 'from-purple-500 to-pink-600' },
+    { icon: Clock, label: 'Support 24/7', value: 'Disponible 24/7', color: 'text-primary-500', bg: 'bg-primary-50' },
+    { icon: Phone, label: 'Téléphone', value: '+33 6 40 60 40 57', href: 'tel:+33640604057', color: 'text-secondary-500', bg: 'bg-secondary-50' },
+    { icon: Mail, label: 'Email', value: 'cindelnettoyage@gmail.com', href: 'mailto:cindelnettoyage@gmail.com', color: 'text-accent-500', bg: 'bg-accent-50' },
+    { icon: MapPin, label: 'Adresse', value: '115 Avenue Saint Vincent De Paul, Dax', color: 'text-emerald-500', bg: 'bg-emerald-50' },
   ];
 
   return (
-    <section
-      id="contact"
-      className="py-24 relative overflow-hidden"
-    >
-      {/* Light gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-cyan-50 via-blue-50 to-emerald-50" />
-      
-      {/* Simplified gradient shapes */}
-      <div className="absolute top-0 right-1/4 w-[300px] h-[300px] bg-gradient-to-br from-cyan-100/30 to-blue-100/30 rounded-full opacity-40" />
-      <div className="absolute bottom-0 left-1/4 w-[350px] h-[350px] bg-gradient-to-tl from-emerald-100/30 to-cyan-100/30 rounded-full opacity-40" />
+    <section id="contact" className="py-24 relative overflow-hidden bg-white">
+      {/* Background Elements */}
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-slate-50 -skew-x-12 translate-x-20 pointer-events-none" />
+      <div className="absolute top-20 left-10 w-72 h-72 bg-primary-100/40 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-16 animate-slideDownFade">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-100 rounded-full mb-6 border border-cyan-300">
-            <MessageSquare className="w-4 h-4 text-cyan-600 animate-pulse" />
-            <span className="text-cyan-900 font-bold uppercase text-xs tracking-wider">Contactez-Nous</span>
-          </div>
-          
-          <h2 className="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-cyan-600 via-blue-600 to-emerald-600 bg-clip-text text-transparent">
-            Entrez En Contact
-          </h2>
-          
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Des questions ? Nous sommes là pour vous aider 24/7
-          </p>
-        </div>
+      <div className="container-width relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
+          {/* Left Content */}
+          <div>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 border border-slate-200 mb-6">
+              <MessageSquare className="w-4 h-4 text-slate-600" />
+              <span className="text-sm font-semibold text-slate-600 uppercase tracking-wider">Contactez-Nous</span>
+            </div>
 
-        <div className="grid lg:grid-cols-5 gap-8">
-          {/* Contact Info Cards - Left Side */}
-          <div className="lg:col-span-2 space-y-6">
-            {contactInfo.map((info, index) => {
-              const Icon = info.icon;
-              return (
-                <div key={index} className="group relative animate-slideInLeft" style={{ animationDelay: `${index * 0.05}s` }}>
-                  <div className={`absolute -inset-0.5 bg-gradient-to-r ${info.gradient} rounded-2xl opacity-0 group-hover:opacity-15 transition duration-200`} />
-                  <div className="relative bg-white rounded-2xl p-5 shadow-md group-hover:shadow-lg transition-all duration-200 group-hover:scale-105 border border-gray-200 group-hover:border-cyan-300">
-                    <div className="flex items-center gap-4">
-                      <div className={`bg-gradient-to-br ${info.gradient} p-3 rounded-xl group-hover:scale-110 transition-transform duration-200`}>
-                        <Icon className="w-5 h-5 text-white" />
-                      </div>
-                      <div>
-                        <div className="text-xs font-semibold text-gray-500 uppercase mb-1">{info.label}</div>
-                        {info.href ? (
-                          <a href={info.href} className="text-base font-bold text-gray-900 hover:text-cyan-600 transition-colors duration-150">
-                            {info.value}
-                          </a>
-                        ) : (
-                          <div className="text-base font-bold text-gray-900">{info.value}</div>
-                        )}
-                      </div>
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-slate-900 mb-6">
+              Parlons de Votre <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600">
+                Projet de Nettoyage
+              </span>
+            </h2>
+
+            <p className="text-lg text-slate-600 mb-12 leading-relaxed">
+              Une question ? Un devis ? Notre équipe est là pour vous répondre. Remplissez le formulaire et nous vous recontacterons dans les plus brefs délais.
+            </p>
+
+            <div className="grid sm:grid-cols-2 gap-6 mb-12">
+              {contactInfo.map((info, index) => {
+                const Icon = info.icon;
+                return (
+                  <div key={index} className="flex items-start gap-4 group">
+                    <div className={`p-3 rounded-2xl ${info.bg} group-hover:scale-110 transition-transform duration-300`}>
+                      <Icon className={`w-6 h-6 ${info.color}`} />
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-slate-400 uppercase tracking-wide mb-1">{info.label}</div>
+                      {info.href ? (
+                        <a href={info.href} className="text-slate-900 font-semibold hover:text-primary-600 transition-colors">
+                          {info.value}
+                        </a>
+                      ) : (
+                        <div className="text-slate-900 font-semibold">{info.value}</div>
+                      )}
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
 
-            {/* CTA Card */}
-            <div className="relative group animate-slideInLeft" style={{ animationDelay: '0.2s' }}>
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 via-blue-400 to-emerald-400 rounded-2xl opacity-15 group-hover:opacity-25 transition duration-200" />
-              <div className="relative bg-gradient-to-br from-cyan-500 via-blue-500 to-emerald-500 rounded-2xl p-5 text-white shadow-lg border border-white/20 group-hover:scale-105 transition-all duration-200">
-                <h3 className="text-xl font-black mb-2">Besoin d'Aide Immédiate ?</h3>
-                <p className="text-white/95 mb-4 text-sm font-medium">Appelez-nous maintenant pour un support instantané</p>
-                <a
-                  href="tel:+33640604057"
-                  className="group/btn inline-flex items-center gap-2 px-5 py-2.5 bg-white text-cyan-600 rounded-xl font-bold hover:scale-110 transition-all duration-150 shadow-md relative overflow-hidden"
-                >
-                  <Phone className="w-4 h-4 relative z-10" />
-                  <span className="relative z-10 text-sm">Appelez Maintenant</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-50 to-emerald-50 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-150" />
-                </a>
-              </div>
+            {/* Emergency Card */}
+            <div className="bg-slate-900 rounded-3xl p-8 text-white relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+
+              <h3 className="text-2xl font-bold mb-2 relative z-10">Urgence Nettoyage ?</h3>
+              <p className="text-slate-400 mb-6 relative z-10">
+                Notre équipe d'intervention rapide est disponible pour les situations urgentes.
+              </p>
+
+              <a
+                href="tel:+33640604057"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-slate-900 rounded-xl font-bold hover:bg-primary-50 transition-colors relative z-10"
+              >
+                <Phone className="w-5 h-5" />
+                <span>Appeler Maintenant</span>
+              </a>
             </div>
           </div>
 
-          {/* Contact Form - Right Side */}
-          <div className="lg:col-span-3">
-            <div className="relative group animate-slideInRight-custom" style={{ animationDelay: '0.1s' }}>
-              <div className="absolute -inset-1 bg-gradient-to-br from-cyan-200 via-blue-200 to-emerald-200 rounded-3xl opacity-10 group-hover:opacity-15 transition duration-200" />
-              
-              <form
-                onSubmit={handleSubmit}
-                className="relative bg-white rounded-3xl p-8 shadow-lg border border-gray-200 group-hover:border-cyan-300 transition-all duration-200"
-              >
-                <div className="space-y-5">
-                  {/* Name */}
-                  <div>
-                    <label htmlFor="contact-name" className="block text-xs font-bold text-cyan-700 mb-2">
-                      <User className="w-3.5 h-3.5 inline mr-1.5" />
-                      Votre Nom
-                    </label>
-                    <input
-                      type="text"
-                      id="contact-name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 bg-white/80 border border-gray-300 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 focus:outline-none transition-all text-sm text-gray-900 placeholder-gray-400 hover:border-cyan-400"
-                      placeholder="Jean Dupont"
-                      required
-                    />
+          {/* Right Form */}
+          <div className="relative">
+            <div className="bg-white rounded-[2.5rem] p-8 md:p-10 shadow-2xl shadow-slate-200/50 border border-slate-100 relative">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-slate-700 ml-1">Nom Complet</label>
+                    <div className="relative">
+                      <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                      <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border-none rounded-xl focus:ring-2 focus:ring-primary-500/20 focus:bg-white transition-all font-medium text-slate-900 placeholder:text-slate-400"
+                        placeholder="Jean Dupont"
+                        required
+                      />
+                    </div>
                   </div>
 
-                  {/* Email & Phone */}
-                  <div className="grid md:grid-cols-2 gap-5">
-                    <div>
-                      <label htmlFor="contact-email" className="block text-xs font-bold text-cyan-700 mb-2">
-                        <Mail className="w-3.5 h-3.5 inline mr-1.5" />
-                        Email
-                      </label>
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-slate-700 ml-1">Email</label>
+                    <div className="relative">
+                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                       <input
                         type="email"
-                        id="contact-email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 bg-white/80 border border-gray-300 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 focus:outline-none transition-all text-sm text-gray-900 placeholder-gray-400 hover:border-cyan-400"
-                        placeholder="john@example.com"
+                        className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border-none rounded-xl focus:ring-2 focus:ring-primary-500/20 focus:bg-white transition-all font-medium text-slate-900 placeholder:text-slate-400"
+                        placeholder="jean@example.com"
                         required
                       />
                     </div>
+                  </div>
+                </div>
 
-                    <div>
-                      <label htmlFor="contact-phone" className="block text-xs font-bold text-cyan-700 mb-2">
-                        <Phone className="w-3.5 h-3.5 inline mr-1.5" />
-                        Téléphone
-                      </label>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-slate-700 ml-1">Téléphone</label>
+                    <div className="relative">
+                      <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                       <input
                         type="tel"
-                        id="contact-phone"
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 bg-white/80 border border-gray-300 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 focus:outline-none transition-all text-sm text-gray-900 placeholder-gray-400 hover:border-cyan-400"
-                      placeholder="+33 6 12 34 56 78"
+                        className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border-none rounded-xl focus:ring-2 focus:ring-primary-500/20 focus:bg-white transition-all font-medium text-slate-900 placeholder:text-slate-400"
+                        placeholder="06 12 34 56 78"
                         required
                       />
                     </div>
                   </div>
 
-                  {/* Reason */}
-                  <div>
-                    <label htmlFor="contact-reason" className="block text-xs font-bold text-cyan-700 mb-2">
-                      <MessageSquare className="w-3.5 h-3.5 inline mr-1.5" />
-                      Raison
-                    </label>
-                    <select
-                      id="contact-reason"
-                      name="reason"
-                      value={formData.reason}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 bg-white/80 border border-gray-300 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 focus:outline-none transition-all appearance-none cursor-pointer text-sm text-gray-900 hover:border-cyan-400"
-                      required
-                    >
-                      <option value="">Sélectionnez une raison...</option>
-                      <option value="booking">Demande de Réservation</option>
-                      <option value="quote">Demande de Devis</option>
-                      <option value="complaint">Réclamation</option>
-                      <option value="feedback">Commentaire</option>
-                      <option value="other">Autre</option>
-                    </select>
-                  </div>
-
-                  {/* Message */}
-                  <div>
-                    <label htmlFor="contact-message" className="block text-xs font-bold text-cyan-700 mb-2">
-                      <Send className="w-3.5 h-3.5 inline mr-1.5" />
-                      Message
-                    </label>
-                    <textarea
-                      id="contact-message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      rows="4"
-                      className="w-full px-4 py-3 bg-white/80 border border-gray-300 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 focus:outline-none transition-all resize-none text-sm text-gray-900 placeholder-gray-400 hover:border-cyan-400"
-                      placeholder="Dites-nous comment nous pouvons vous aider..."
-                      required
-                    />
-                  </div>
-
-                  {/* Submit Button */}
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="group/btn relative w-full py-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-emerald-500 text-white rounded-xl font-black text-base overflow-hidden shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 disabled:opacity-50"
-                  >
-                    <span className="relative z-10 flex items-center justify-center gap-2">
-                      {isSubmitting ? 'Envoi en cours...' : 'Envoyer le Message'}
-                      <Send className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:rotate-12 transition-transform duration-150" />
-                    </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-200" />
-                    {/* Shine effect */}
-                    <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-300 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12" />
-                  </button>
-
-                  {/* Status Message */}
-                  {status && (
-                    <div
-                      className={`p-3 rounded-xl text-center text-sm font-bold ${
-                        status === 'success'
-                          ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                          : 'bg-red-50 text-red-700 border border-red-200'
-                      }`}
-                    >
-                      {status === 'success'
-                        ? '✓ Message envoyé avec succès ! Nous vous répondrons bientôt.'
-                        : '✗ Quelque chose s\'est mal passé. Veuillez réessayer.'}
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-slate-700 ml-1">Sujet</label>
+                    <div className="relative">
+                      <MessageSquare className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                      <select
+                        name="reason"
+                        value={formData.reason}
+                        onChange={handleChange}
+                        className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border-none rounded-xl focus:ring-2 focus:ring-primary-500/20 focus:bg-white transition-all font-medium text-slate-900 appearance-none cursor-pointer"
+                        required
+                      >
+                        <option value="">Sélectionnez...</option>
+                        <option value="booking">Réservation</option>
+                        <option value="quote">Devis</option>
+                        <option value="info">Information</option>
+                        <option value="other">Autre</option>
+                      </select>
                     </div>
-                  )}
+                  </div>
                 </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-slate-700 ml-1">Message</label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows="4"
+                    className="w-full px-4 py-3.5 bg-slate-50 border-none rounded-xl focus:ring-2 focus:ring-primary-500/20 focus:bg-white transition-all font-medium text-slate-900 placeholder:text-slate-400 resize-none"
+                    placeholder="Comment pouvons-nous vous aider ?"
+                    required
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full py-4 bg-slate-900 text-white rounded-xl font-bold text-lg hover:bg-primary-600 transition-all duration-300 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? (
+                    'Envoi en cours...'
+                  ) : (
+                    <>
+                      <span>Envoyer le Message</span>
+                      <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    </>
+                  )}
+                </button>
+
+                {status && (
+                  <div className={`p-4 rounded-xl text-center font-medium text-sm ${status === 'success' ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'
+                    }`}>
+                    {status === 'success'
+                      ? 'Message envoyé avec succès ! Nous vous répondrons très vite.'
+                      : 'Une erreur est survenue. Veuillez réessayer.'}
+                  </div>
+                )}
               </form>
             </div>
           </div>

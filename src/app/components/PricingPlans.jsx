@@ -6,171 +6,152 @@ const plans = [
   {
     name: 'Basique',
     icon: Sparkles,
-    gradient: 'from-cyan-400 via-blue-500 to-purple-600',
-    bgGradient: 'from-cyan-500/10 via-blue-500/5 to-purple-600/10',
-    glowColor: 'cyan',
+    price: 'Sur Devis',
+    description: 'Idéal pour un entretien régulier',
     features: [
-      'Nettoyage général',
-      'Cuisine et salle de bain',
-      'Aspirateur et lavage sols',
-      'Dépoussiérage surfaces',
-      'Service de 2-3 heures',
+      'Nettoyage des sols',
+      'Dépoussiérage complet',
+      'Sanitaires et cuisine',
+      'Sortie des poubelles',
+      'Produits fournis'
     ],
-    popular: false,
-  },
-  {
-    name: 'Standard',
-    icon: Zap,
-    gradient: 'from-emerald-400 via-teal-500 to-cyan-600',
-    bgGradient: 'from-emerald-500/10 via-teal-500/5 to-cyan-600/10',
-    glowColor: 'emerald',
-    features: [
-      'Tout ce qui est dans Basique',
-      'Nettoyage en profondeur',
-      'Intérieur des appareils',
-      'Nettoyage des vitres',
-      'Service de lessive',
-      'Service de 4-5 heures',
-    ],
-    popular: true,
+    gradient: 'from-blue-400 to-cyan-400',
+    popular: false
   },
   {
     name: 'Premium',
-    icon: Crown,
-    gradient: 'from-orange-400 via-pink-500 to-purple-600',
-    bgGradient: 'from-orange-500/10 via-pink-500/5 to-purple-600/10',
-    glowColor: 'pink',
+    icon: Zap,
+    price: 'Sur Devis',
+    description: 'Le choix préféré de nos clients',
     features: [
-      'Tout ce qui est dans Standard',
-      'Nettoyage de tapis',
-      'Nettoyage de meubles',
-      'Nettoyage extérieur',
-      'Organisation et rangement',
-      "Service d'une journée",
+      'Tout du pack Basique',
+      'Nettoyage des vitres',
+      'Intérieur des placards',
+      'Désinfection complète',
+      'Repassage inclus'
     ],
-    popular: false,
+    gradient: 'from-primary-500 to-secondary-500',
+    popular: true
   },
+  {
+    name: 'Excellence',
+    icon: Crown,
+    price: 'Sur Devis',
+    description: 'Pour une propreté absolue',
+    features: [
+      'Tout du pack Premium',
+      'Shampouinage tapis/moquettes',
+      'Nettoyage vapeur',
+      'Traitement des sols',
+      'Service prioritaire'
+    ],
+    gradient: 'from-purple-500 to-pink-500',
+    popular: false
+  }
 ];
 
 export default function PricingPlans() {
-
   const handleButtonClick = () => {
     document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section
-      id="pricing"
-      className="py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50"
-    >
-      {/* Simplified gradient shapes - no blur */}
-      <div className="absolute top-0 right-1/4 w-[300px] h-[300px] bg-gradient-to-br from-cyan-100/20 to-purple-100/20 rounded-full opacity-50" />
-      <div className="absolute bottom-0 left-1/4 w-[350px] h-[350px] bg-gradient-to-tl from-pink-100/20 to-cyan-100/20 rounded-full opacity-50" />
+    <section id="pricing" className="py-24 relative overflow-hidden bg-slate-50">
+      {/* Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-primary-100/40 rounded-full blur-3xl translate-x-1/3" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-secondary-100/40 rounded-full blur-3xl -translate-x-1/3" />
+      </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-8 sm:mb-12 md:mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 rounded-full mb-4 sm:mb-6 border border-purple-200">
-            <Star className="w-4 h-4 text-purple-600 animate-pulse" />
-            <span className="text-purple-900 font-semibold uppercase text-xs tracking-wider">Tarifs Premium</span>
+      <div className="container-width relative z-10">
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm mb-6">
+            <Star className="w-4 h-4 text-yellow-400 fill-current" />
+            <span className="text-sm font-semibold text-slate-600 uppercase tracking-wider">Nos Formules</span>
           </div>
-          
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 px-4">
-            <span className="bg-gradient-to-r from-cyan-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Choisissez Votre Service
+
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-slate-900 mb-6">
+            Des Tarifs Transparents <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600">
+              Adaptés à Vos Besoins
             </span>
           </h2>
-          
-          <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto px-4">
-            Services de nettoyage professionnels adaptés à vos besoins
+
+          <p className="text-lg text-slate-600 leading-relaxed">
+            Choisissez la formule qui correspond le mieux à vos attentes.
+            Nos devis sont gratuits et sans engagement.
           </p>
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {plans.map((plan, index) => {
             const Icon = plan.icon;
             return (
               <div
-                key={plan.name}
-                className="group relative animate-fadeScaleIn"
-                style={{ animationDelay: `${index * 0.05}s` }}
+                key={index}
+                className={`relative group rounded-[2rem] p-1 transition-all duration-300 hover:-translate-y-2 ${plan.popular ? 'bg-gradient-to-b from-primary-500 to-secondary-500 shadow-xl shadow-primary-500/20' : 'bg-white hover:shadow-xl hover:shadow-slate-200/50'
+                  }`}
               >
-                {/* Popular badge */}
                 {plan.popular && (
-                  <div className="absolute -top-2.5 md:-top-3.5 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-                    <div className="bg-gradient-to-r from-yellow-400 via-orange-500 to-pink-500 text-white px-5 py-1.5 rounded-full text-xs font-bold shadow-lg">
-                      ⚡ PLUS POPULAIRE ⚡
-                    </div>
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary-600 to-secondary-600 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg z-20">
+                    Recommandé
                   </div>
                 )}
 
-                {/* Simplified glow effect */}
-                <div className={`absolute -inset-0.5 bg-gradient-to-r ${plan.gradient} rounded-3xl opacity-0 group-hover:opacity-20 transition duration-200`} />
-
-                {/* Card */}
-                <div className={`relative bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-lg group-hover:shadow-xl transition-all duration-200 ${plan.popular ? 'md:scale-105 border-purple-300' : ''}`}>
-                  {/* Animated border gradient */}
-                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-                  
-                  {/* Header with gradient */}
-                  <div className={`relative bg-gradient-to-br ${plan.gradient} p-6 sm:p-8 text-white text-center overflow-hidden`}>
-                    <div className="relative">
-                      <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-white/20 rounded-xl sm:rounded-2xl mb-3 sm:mb-4 border border-white/20 group-hover:scale-105 transition-transform duration-200">
-                        <Icon className="w-6 h-6 sm:w-8 sm:h-8" />
-                      </div>
-                      <h3 className="text-2xl sm:text-3xl font-bold mb-2 tracking-tight">{plan.name}</h3>
-                      <p className="text-lg sm:text-xl opacity-90 font-medium">Devis Personnalisé</p>
+                <div className="h-full bg-white rounded-[1.8rem] p-8 flex flex-col relative overflow-hidden">
+                  {/* Header */}
+                  <div className="mb-8">
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 bg-gradient-to-br ${plan.gradient} text-white shadow-lg`}>
+                      <Icon className="w-7 h-7" />
                     </div>
+                    <h3 className="text-2xl font-bold text-slate-900 mb-2">{plan.name}</h3>
+                    <p className="text-slate-500 text-sm">{plan.description}</p>
+                  </div>
+
+                  {/* Price */}
+                  <div className="mb-8">
+                    <div className="text-3xl font-bold text-slate-900">{plan.price}</div>
+                    <div className="text-sm text-slate-500 mt-1">Devis gratuit sous 24h</div>
                   </div>
 
                   {/* Features */}
-                  <div className="p-6 sm:p-8 bg-white/80">
-                    <ul className="space-y-3 mb-6">
-                      {plan.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-3 group/item">
-                          <div className={`flex-shrink-0 w-5 h-5 rounded-lg border-2 border-current flex items-center justify-center group-hover/item:scale-105 transition-transform duration-150 bg-gradient-to-br ${plan.gradient} bg-clip-text text-transparent`}>
-                            <Check className="w-3 h-3" strokeWidth={3} style={{ stroke: 'url(#gradient-' + idx + ')' }} />
-                            <svg width="0" height="0">
-                              <defs>
-                                <linearGradient id={`gradient-${idx}`} x1="0%" y1="0%" x2="100%" y2="100%">
-                                  <stop offset="0%" stopColor={plan.gradient.includes('cyan') ? '#22d3ee' : plan.gradient.includes('emerald') ? '#10b981' : '#fb923c'} />
-                                  <stop offset="100%" stopColor={plan.gradient.includes('purple') ? '#9333ea' : plan.gradient.includes('cyan') ? '#06b6d4' : '#c026d3'} />
-                                </linearGradient>
-                              </defs>
-                            </svg>
-                          </div>
-                          <span className="text-gray-700 font-medium text-sm group-hover/item:text-gray-900 transition-colors duration-150">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  <ul className="space-y-4 mb-8 flex-grow">
+                    {plan.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start gap-3 text-slate-600 text-sm">
+                        <div className={`mt-0.5 p-1 rounded-full bg-gradient-to-br ${plan.gradient} opacity-80`}>
+                          <Check className="w-3 h-3 text-white" strokeWidth={3} />
+                        </div>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
 
-                    {/* CTA Button */}
-                    <button
-                      onClick={handleButtonClick}
-                      className={`group/btn relative w-full py-3 sm:py-4 bg-gradient-to-r ${plan.gradient} text-white rounded-xl font-bold text-sm sm:text-base overflow-hidden shadow-md hover:shadow-lg transition-all duration-200 hover:scale-[1.02]`}
-                    >
-                      <span className="relative z-10 flex items-center justify-center gap-2">
-                        Demander un Devis
-                        <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-150" />
-                      </span>
-                      
-                      {/* Shine effect */}
-                      <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-300 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12" />
-                    </button>
-                  </div>
+                  {/* CTA Button */}
+                  <button
+                    onClick={handleButtonClick}
+                    className={`w-full py-4 rounded-xl font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2 group/btn ${plan.popular
+                        ? 'bg-slate-900 text-white hover:bg-slate-800 shadow-lg hover:shadow-xl'
+                        : 'bg-slate-50 text-slate-900 hover:bg-slate-100'
+                      }`}
+                  >
+                    <span>Choisir cette formule</span>
+                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                  </button>
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* Bottom note */}
-        <div className="text-center mt-10 sm:mt-12">
-          <div className="inline-block px-6 py-3 bg-white rounded-xl border border-purple-200 shadow-md">
-            <p className="text-gray-700 text-sm font-medium">
-              ✨ Tous les forfaits incluent des produits écologiques et une garantie de satisfaction à 100% 🌿
-            </p>
+        {/* Guarantee Badge */}
+        <div className="mt-16 text-center">
+          <div className="inline-flex items-center gap-3 px-6 py-3 bg-white rounded-2xl shadow-lg shadow-slate-200/50 border border-slate-100">
+            <div className="p-2 bg-emerald-100 rounded-full">
+              <Check className="w-5 h-5 text-emerald-600" />
+            </div>
+            <span className="text-slate-600 font-medium">Satisfaction garantie ou remboursé</span>
           </div>
         </div>
       </div>

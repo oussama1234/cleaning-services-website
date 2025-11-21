@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Star, Quote, Sparkles } from 'lucide-react';
 
 const testimonials = [
   {
@@ -9,10 +9,8 @@ const testimonials = [
     name: 'Sarah Johnson',
     company: 'Propriétaire',
     rating: 5,
-    quote: 'Service absolument exceptionnel ! L\'equipe était professionnelle, minutieuse et a laissé ma maison impeccable. Je recommande vivement leur service de nettoyage en profondeur.',
-    gradient: 'from-primary-500 to-emerald-600',
+    quote: 'Service absolument exceptionnel ! L\'équipe était professionnelle, minutieuse et a laissé ma maison impeccable. Je recommande vivement leur service de nettoyage en profondeur.',
     image: 'https://randomuser.me/api/portraits/women/44.jpg',
-    gender: 'female'
   },
   {
     id: 2,
@@ -20,19 +18,15 @@ const testimonials = [
     company: 'PDG de Startup Tech',
     rating: 5,
     quote: 'Nous utilisons leur service de nettoyage de bureau chaque semaine et nous ne pourrions pas être plus satisfaits. Notre espace de travail est toujours impeccable et le personnel est incroyablement fiable.',
-    gradient: 'from-blue-500 to-cyan-600',
     image: 'https://randomuser.me/api/portraits/men/32.jpg',
-    gender: 'male'
   },
   {
     id: 3,
     name: 'Emily Rodriguez',
     company: 'Propriétaire de Restaurant',
     rating: 5,
-    quote: 'Le service de désinfection pendant la pandémie a été une bouee de sauvetage pour notre entreprise. Professionnel, efficace et très minutieux. Merci !',
-    gradient: 'from-accent-500 to-orange-600',
+    quote: 'Le service de désinfection pendant la pandémie a été une bouée de sauvetage pour notre entreprise. Professionnel, efficace et très minutieux. Merci !',
     image: 'https://randomuser.me/api/portraits/women/68.jpg',
-    gender: 'female'
   },
   {
     id: 4,
@@ -40,17 +34,13 @@ const testimonials = [
     company: 'Gestionnaire Immobilier',
     rating: 5,
     quote: 'Leur service de nettoyage de fin de bail est le meilleur que j\'ai jamais vu. Cela facilite tellement la rotation de mes propriétés locatives. Hautement recommandé !',
-    gradient: 'from-purple-500 to-pink-600',
     image: 'https://randomuser.me/api/portraits/men/46.jpg',
-    gender: 'male'
   },
 ];
 
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [displayIndex, setDisplayIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
   const autoplayRef = useRef(null);
 
   useEffect(() => {
@@ -59,24 +49,8 @@ export default function Testimonials() {
         setCurrentIndex((prev) => (prev + 1) % testimonials.length);
       }, 5000);
     }
-
-    return () => {
-      if (autoplayRef.current) {
-        clearInterval(autoplayRef.current);
-      }
-    };
-  }, [isPaused, currentIndex]);
-
-  // Trigger animation on index change
-  useEffect(() => {
-    setIsAnimating(true);
-    // Wait for fade out, then change content, then fade in
-    const timer = setTimeout(() => {
-      setDisplayIndex(currentIndex);
-      setIsAnimating(false);
-    }, 200); // Half of the transition duration for fade out
-    return () => clearTimeout(timer);
-  }, [currentIndex]);
+    return () => clearInterval(autoplayRef.current);
+  }, [isPaused]);
 
   const goToNext = () => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
@@ -86,114 +60,109 @@ export default function Testimonials() {
     setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
-  const current = testimonials[displayIndex];
+  const current = testimonials[currentIndex];
 
   return (
-    <section
-      id="testimonials"
-      className="py-16 relative overflow-hidden"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-teal-500/5 to-cyan-500/10" />
+    <section id="testimonials" className="py-24 relative overflow-hidden bg-slate-50">
+      {/* Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary-200/20 rounded-full blur-3xl -translate-y-1/2" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-secondary-200/20 rounded-full blur-3xl translate-y-1/2" />
+      </div>
 
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container-width relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-50 to-emerald-50 rounded-full mb-6">
-            <Star className="w-5 h-5 text-primary-600 fill-primary-600" />
-            <span className="text-primary-700 font-semibold uppercase text-sm tracking-wide">Témoignages</span>
+        <div className="text-center mb-16 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm mb-6">
+            <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+            <span className="text-sm font-semibold text-slate-600 uppercase tracking-wider">Témoignages</span>
           </div>
-          
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-primary-600 to-emerald-600 bg-clip-text text-transparent">
-              Ce Que Disent Nos Clients
+
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-slate-900 mb-6">
+            Ce Que Disent <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600">
+              Nos Clients
             </span>
           </h2>
         </div>
 
-        {/* Testimonial Card */}
-        <div className="relative transition-all duration-400" style={{
-          opacity: isAnimating ? 0 : 1,
-          transform: isAnimating ? 'scale(0.95)' : 'scale(1)',
-        }}>
-            {/* Glow effect */}
-          <div className={`absolute -inset-1 bg-gradient-to-r ${current.gradient} rounded-3xl opacity-10`} />
-
-          <div className="relative bg-white rounded-3xl p-8 md:p-12 shadow-card">
-            {/* Quote icon - redesigned */}
-            <div className={`absolute top-6 left-6 w-14 h-14 bg-gradient-to-br ${current.gradient} rounded-xl flex items-center justify-center shadow-lg`}>
-              <Quote className="w-7 h-7 text-white fill-white" />
+        {/* Testimonial Carousel */}
+        <div
+          className="max-w-4xl mx-auto"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <div className="relative bg-white rounded-[2.5rem] p-8 md:p-12 shadow-xl shadow-slate-200/50 border border-slate-100">
+            {/* Decorative Quote Icon */}
+            <div className="absolute -top-6 left-12 bg-gradient-to-br from-primary-500 to-secondary-600 w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg transform -rotate-6">
+              <Quote className="w-8 h-8 text-white fill-white/20" />
             </div>
 
-            {/* Profile Image and Info */}
-            <div className="flex flex-col items-center mb-6">
-              {/* Avatar with real image */}
-              <div className="relative group mb-4">
-                <div className={`absolute -inset-1 bg-gradient-to-br ${current.gradient} rounded-full opacity-20 group-hover:opacity-30 transition-opacity`} />
-                <div className="relative w-24 h-24 rounded-full overflow-hidden shadow-xl border-4 border-white">
-                  <img 
-                    src={current.image} 
+            <div className="grid md:grid-cols-[1fr,1.5fr] gap-8 md:gap-12 items-center">
+              {/* Image Side */}
+              <div className="relative">
+                <div className="aspect-square rounded-2xl overflow-hidden bg-slate-100 relative group">
+                  <img
+                    src={current.image}
                     alt={current.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+
+                  {/* Rating Badge */}
+                  <div className="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm p-3 rounded-xl flex justify-center gap-1 shadow-lg">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Decorative Dots */}
+                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-pattern-dots opacity-20 -z-10" />
+              </div>
+
+              {/* Content Side */}
+              <div className="text-center md:text-left">
+                <blockquote className="text-xl md:text-2xl font-medium text-slate-700 leading-relaxed mb-8">
+                  "{current.quote}"
+                </blockquote>
+
+                <div>
+                  <div className="text-lg font-bold text-slate-900">{current.name}</div>
+                  <div className="text-primary-600 font-medium">{current.company}</div>
+                </div>
+
+                {/* Navigation */}
+                <div className="flex items-center justify-center md:justify-start gap-4 mt-8">
+                  <button
+                    onClick={goToPrev}
+                    className="p-3 rounded-full bg-slate-50 text-slate-600 hover:bg-primary-50 hover:text-primary-600 transition-all duration-300"
+                    aria-label="Previous testimonial"
+                  >
+                    <ChevronLeft className="w-6 h-6" />
+                  </button>
+                  <div className="flex gap-2">
+                    {testimonials.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setCurrentIndex(idx)}
+                        className={`h-2 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-8 bg-primary-500' : 'w-2 bg-slate-200 hover:bg-primary-200'
+                          }`}
+                        aria-label={`Go to slide ${idx + 1}`}
+                      />
+                    ))}
+                  </div>
+                  <button
+                    onClick={goToNext}
+                    className="p-3 rounded-full bg-slate-50 text-slate-600 hover:bg-primary-50 hover:text-primary-600 transition-all duration-300"
+                    aria-label="Next testimonial"
+                  >
+                    <ChevronRight className="w-6 h-6" />
+                  </button>
                 </div>
               </div>
-              
-              <div className="text-center">
-                <div className="font-bold text-gray-900 text-xl mb-1">
-                  {current.name}
-                </div>
-                <div className="text-gray-600 text-sm">{current.company}</div>
-              </div>
             </div>
-
-            {/* Stars */}
-            <div className="flex justify-center gap-1 mb-6">
-              {[...Array(current.rating)].map((_, i) => (
-                <Star key={i} className={`w-6 h-6 text-yellow-500 fill-yellow-500`} />
-              ))}
-            </div>
-
-            {/* Quote */}
-            <blockquote className="text-lg md:text-xl text-gray-700 text-center leading-relaxed font-medium max-w-3xl mx-auto italic">
-              "{current.quote}"
-            </blockquote>
-
-            {/* Navigation Arrows */}
-            <button
-              onClick={goToPrev}
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-50 p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110 group border-2 border-gray-100"
-              aria-label="Previous testimonial"
-            >
-              <ChevronLeft className="w-6 h-6 text-gray-700 group-hover:-translate-x-1 transition-transform duration-150" />
-            </button>
-
-            <button
-              onClick={goToNext}
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-50 p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110 group border-2 border-gray-100"
-              aria-label="Next testimonial"
-            >
-              <ChevronRight className="w-6 h-6 text-gray-700 group-hover:translate-x-1 transition-transform duration-150" />
-            </button>
           </div>
-        </div>
-
-        {/* Dots */}
-        <div className="flex justify-center gap-3 mt-8">
-          {testimonials.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`h-3 rounded-full transition-all duration-200 ${
-                index === currentIndex 
-                  ? 'w-12 bg-gradient-to-r from-primary-500 to-emerald-600' 
-                  : 'w-3 bg-gray-300 hover:bg-gray-400'
-              }`}
-              aria-label={`Go to testimonial ${index + 1}`}
-            />
-          ))}
         </div>
       </div>
     </section>

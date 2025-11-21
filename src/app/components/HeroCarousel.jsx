@@ -1,404 +1,164 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Phone, Sparkles, Star, Users, Award } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Phone, Sparkles, Star, ArrowRight, CheckCircle2, PlayCircle } from 'lucide-react';
 
-const slides = [
-  {
-    bg: 'from-emerald-500 to-teal-600',
-    image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1920&q=80',
-    eyebrow: 'Nettoyage Professionnel',
-    heading: 'Transformez Votre Espace en Paradis Impeccable',
-    subheading: 'Services de nettoyage experts avec produits écologiques et professionnels certifiés',
-    phone: '+33640604057',
-  },
-  {
-    bg: 'from-orange-500 to-amber-600',
-    image: 'https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?w=1920&q=80',
-    eyebrow: 'Fiable & Digne de Confiance',
-    heading: 'Un Service de Qualité Sur Lequel Vous Pouvez Compter',
-    subheading: "2+ ans d'expérience • 1000+ clients satisfaits • 100% satisfaction garantie",
-    phone: '+33640604057',
-  },
-  {
-    bg: 'from-blue-500 to-cyan-600',
-    image: 'https://images.unsplash.com/photo-1563453392212-326f5e854473?w=1920&q=80',
-    eyebrow: 'Offre Spéciale',
-    heading: 'Obtenez 10% de Réduction Sur Votre Premier Service',
-    subheading: 'Réservez maintenant et découvrez la différence. Offre limitée!',
-    phone: '+33640604057',
-  },
-];
+export default function HeroSection() {
+  const [isVisible, setIsVisible] = useState(false);
 
-// Mobile CTA Card Component (shown outside carousel)
-export function MobileCTACard() {
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
   return (
-    <section className="md:hidden relative px-4 pt-8 pb-8">
-      <div className="relative group max-w-7xl mx-auto">
-        {/* Glow Effect */}
-        <div className="absolute -inset-1 bg-gradient-to-r from-primary-500 via-emerald-500 to-cyan-500 rounded-2xl blur-xl opacity-75 group-hover:opacity-100 transition duration-200 animate-gradient" style={{ backgroundSize: '200% 200%' }} />
-        
-        {/* Main Card */}
-        <div className="relative bg-white/95 backdrop-blur-md rounded-2xl p-4 sm:p-6 shadow-card group-hover:shadow-card-hover transition-all duration-200">
-          <div className="flex flex-col items-center gap-4">
-            {/* Icon */}
-            <div className="relative flex-shrink-0">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary-400 to-emerald-600 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-200" />
-              <div className="relative bg-gradient-to-br from-primary-500 to-emerald-600 p-4 rounded-2xl shadow-glow">
-                <Phone size={32} className="text-white" />
-              </div>
-            </div>
+    <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-20">
+      {/* Dynamic Background */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50" />
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-br from-primary-400/20 to-secondary-400/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 animate-blob" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-accent-400/20 to-primary-400/20 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4 animate-blob animation-delay-2000" />
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+      </div>
 
-            {/* Text */}
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-2 mb-1">
-                <Sparkles className="w-4 h-4 text-accent-500" />
-                <span className="text-xs font-semibold text-accent-600 uppercase tracking-wide">Réponse Rapide</span>
-              </div>
-              <h3 className="text-xl font-bold bg-gradient-to-r from-primary-600 to-emerald-600 bg-clip-text text-transparent mb-1">
-                Appelez-Nous À Tout Moment
-              </h3>
-              <p className="text-gray-600 text-sm">
-                Support 24/7 • Devis instantanés • Services d&apos;urgence
-              </p>
-            </div>
+      <div className="container-width relative z-10 w-full">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-            {/* CTA Button */}
-            <a
-              href="tel:+33640604057"
-              className="group/btn relative w-full px-6 py-3 bg-gradient-to-r from-primary-500 to-emerald-600 text-white rounded-xl font-bold text-lg text-center overflow-hidden shadow-glow hover:shadow-glow-lg transition-all duration-200 hover:scale-105"
-            >
-              <span className="relative z-10 flex items-center justify-center gap-2">
-                <Phone className="w-5 h-5 group-hover/btn:rotate-12 transition-transform duration-150" />
-                +33 6 40 60 40 57
+          {/* Text Content */}
+          <div className={`space-y-8 transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-primary-100 shadow-sm animate-float">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-primary-500"></span>
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-primary-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-200" />
-              
-              {/* Shine effect */}
-              <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-500 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-            </a>
+              <span className="text-sm font-semibold text-slate-600">N°1 du Nettoyage en Île-de-France</span>
+            </div>
+
+            {/* Heading */}
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold leading-tight text-slate-900">
+              La Propreté <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600 relative">
+                Réinventée
+                <svg className="absolute w-full h-3 -bottom-1 left-0 text-primary-400/30" viewBox="0 0 100 10" preserveAspectRatio="none">
+                  <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="none" />
+                </svg>
+              </span>
+            </h1>
+
+            <p className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-lg">
+              Découvrez une expérience de nettoyage premium alliant technologie moderne et expertise humaine. Pour les particuliers et les professionnels exigeants.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a
+                href="tel:+33640604057"
+                className="group relative px-8 py-4 bg-slate-900 text-white rounded-full font-semibold text-lg shadow-lg shadow-slate-900/20 hover:shadow-slate-900/40 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-secondary-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  <Phone className="w-5 h-5" />
+                  Appeler Maintenant
+                </span>
+              </a>
+
+              <a
+                href="#contact"
+                className="group px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-full font-semibold text-lg shadow-sm hover:shadow-md hover:border-primary-200 hover:text-primary-600 transition-all duration-300 flex items-center justify-center gap-2"
+              >
+                <span>Devis Gratuit</span>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
 
             {/* Trust Indicators */}
-            <div className="flex items-center gap-3 text-sm text-gray-700">
-              <div className="flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-lg">
-                <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                <span className="font-bold">Note 4.9/5</span>
+            <div className="pt-8 border-t border-slate-200/60 flex flex-wrap gap-6 text-sm font-medium text-slate-500">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                <span>Personnel Qualifié</span>
               </div>
-              <div className="flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-lg">
-                <Users className="w-4 h-4 text-primary-500" />
-                <span className="font-bold">1K+ Clients</span>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                <span>Produits Écologiques</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                <span>Satisfaction 100%</span>
               </div>
             </div>
           </div>
+
+          {/* Visual Content */}
+          <div className={`relative hidden lg:block transition-all duration-1000 delay-300 transform ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
+            <div className="relative z-10">
+              <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl shadow-primary-900/20 border-8 border-white bg-white">
+                <img
+                  src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=80"
+                  alt="Professional Cleaning"
+                  className="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-105"
+                />
+
+                {/* Floating Card 1 */}
+                <div className="absolute bottom-8 left-8 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-white/50 animate-float-delayed max-w-[200px]">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="p-2 bg-green-100 rounded-lg text-green-600">
+                      <Star className="w-5 h-5 fill-current" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-slate-500 font-semibold uppercase">Avis Clients</p>
+                      <p className="text-lg font-bold text-slate-900">4.9/5</p>
+                    </div>
+                  </div>
+                  <div className="flex -space-x-2">
+                    {[1, 2, 3, 4].map(i => (
+                      <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-slate-200" />
+                    ))}
+                    <div className="w-8 h-8 rounded-full border-2 border-white bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">+1k</div>
+                  </div>
+                </div>
+
+                {/* Floating Card 2 */}
+                <div className="absolute top-8 right-8 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-white/50 animate-float">
+                  <div className="flex items-center gap-3">
+                    <div className="p-3 bg-primary-100 rounded-xl text-primary-600">
+                      <Sparkles className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-slate-900">Service Premium</p>
+                      <p className="text-xs text-slate-500">Disponible 24/7</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Decorative Elements behind image */}
+            <div className="absolute -top-10 -right-10 w-64 h-64 bg-secondary-400/30 rounded-full blur-3xl -z-10" />
+            <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-primary-400/30 rounded-full blur-3xl -z-10" />
+          </div>
+
         </div>
       </div>
     </section>
   );
 }
 
-export default function HeroCarousel() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const contentRef = useRef(null);
-  const autoplayRef = useRef(null);
-
-  const nextSlide = () => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setIsPaused(false);
-    
-    setTimeout(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-      setTimeout(() => setIsTransitioning(false), 50);
-    }, 200);
-  };
-
-  const prevSlide = () => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setIsPaused(false);
-    
-    setTimeout(() => {
-      setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-      setTimeout(() => setIsTransitioning(false), 50);
-    }, 200);
-  };
-
-  useEffect(() => {
-    // Trigger hero animation immediately on load for all hero-items in hero section
-    const heroSection = document.querySelector('#home');
-    if (heroSection) {
-      const items = heroSection.querySelectorAll('.hero-item');
-      items.forEach(item => {
-        item.classList.add('in-view');
-      });
-    }
-  }, []);
-
-  useEffect(() => {
-    // Reset animation on slide change for text items only (not CTA card)
-    if (contentRef.current) {
-      const items = contentRef.current.querySelectorAll('.hero-item');
-      items.forEach(item => {
-        item.classList.remove('in-view');
-        setTimeout(() => {
-          item.classList.add('in-view');
-        }, 10);
-      });
-    }
-  }, [currentSlide]);
-
-  useEffect(() => {
-    if (!isPaused) {
-      autoplayRef.current = setInterval(() => {
-        setIsTransitioning(true);
-        setTimeout(() => {
-          setCurrentSlide((prev) => (prev + 1) % slides.length);
-          setTimeout(() => setIsTransitioning(false), 50);
-        }, 200);
-      }, 6000);
-    }
-
-    return () => {
-      if (autoplayRef.current) {
-        clearInterval(autoplayRef.current);
-      }
-    };
-  }, [currentSlide, isPaused]);
-
-  const current = slides[currentSlide];
-
+export function MobileCTACard() {
   return (
-    <section
-      id="home"
-      className="relative min-h-[600px] h-[70vh] sm:h-[80vh] lg:h-[85vh] max-h-[900px] flex items-center overflow-hidden"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
-      {/* Background Image with Gradient Overlay */}
-      <div className="absolute inset-0">
-        {/* Image with fade + zoom transition */}
-        <div className={`absolute inset-0 transition-all duration-200 ${
-          isTransitioning ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
-        }`} style={{
-          transitionTimingFunction: 'ease-out'
-        }}>
-          <img
-            src={current.image}
-            alt="Cleaning service"
-            className="absolute inset-0 w-full h-full object-cover object-center"
-          />
+    <div className="fixed bottom-4 left-4 right-4 z-50 lg:hidden">
+      <div className="bg-white/90 backdrop-blur-md border border-white/20 p-4 rounded-2xl shadow-lg flex items-center justify-between gap-4">
+        <div className="flex-1">
+          <p className="text-sm font-bold text-slate-900">Besoin d'un nettoyage ?</p>
+          <p className="text-xs text-slate-500">Devis gratuit en 2 min</p>
         </div>
-        
-        {/* Gradient Overlay for better text contrast */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${current.bg} transition-opacity duration-200 ${
-          isTransitioning ? 'opacity-0' : 'opacity-30'
-        }`} />
-        
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-black/20" />
-        
-        {/* Geometric Patterns */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-10 w-64 h-64 bg-white rounded-full blur-3xl animate-float" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-white rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
-          <div className="absolute top-1/2 left-1/4 w-48 h-48 bg-white rounded-full blur-2xl animate-pulse-slow" />
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-4 sm:py-8">
-        <div ref={contentRef} className={`max-w-4xl mb-4 text-center sm:text-left transition-all duration-200 ${
-          isTransitioning ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
-        }`} style={{
-          transitionTimingFunction: 'ease-out'
-        }}>
-          {/* Eyebrow */}
-          <div className="hero-item flex items-center justify-center sm:justify-start gap-2 mb-4 sm:mb-6">
-            <Sparkles className="text-white w-4 h-4 sm:w-5 sm:h-5 animate-pulse" />
-            <span className="text-white/90 text-xs sm:text-sm font-semibold uppercase tracking-wider bg-white/10 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/20">
-              {current.eyebrow}
-            </span>
-          </div>
-
-          {/* Heading */}
-          <h1 className="hero-item text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-4 leading-tight drop-shadow-2xl min-h-[80px] sm:min-h-[100px] md:min-h-[140px]">
-            {current.heading}
-          </h1>
-
-          {/* Subheading */}
-          <p className="hero-item text-base sm:text-lg md:text-xl text-white/95 mb-5 sm:mb-6 leading-relaxed font-light max-w-2xl min-h-[50px] sm:min-h-[60px] md:min-h-[70px]">
-            {current.subheading}
-          </p>
-
-          {/* CTAs */}
-          <div className="hero-item flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center sm:justify-start">
-            <a
-              href={`tel:${current.phone}`}
-              className="group relative px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-primary-500 to-emerald-600 rounded-xl font-bold text-base sm:text-lg overflow-hidden shadow-2xl hover:shadow-glow-lg transition-all duration-200 hover:scale-105 w-full sm:w-auto"
-            >
-              <span className="relative z-10 flex items-center justify-center gap-2 text-white group-hover:text-primary-600 transition-colors duration-150">
-                <Phone className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform duration-150" />
-                Appelez-Nous
-              </span>
-              <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-150" />
-            </a>
-
-            <button
-              onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="group relative px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-accent-500 to-orange-600 text-white rounded-xl font-bold text-base sm:text-lg overflow-hidden shadow-2xl hover:shadow-accent-glow transition-all duration-200 hover:scale-105 w-full sm:w-auto"
-            >
-              <span className="relative z-10 flex items-center justify-center gap-2 group-hover:text-accent-500 transition-colors duration-150">
-                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-180 transition-transform duration-300" />
-                Demander un Devis
-              </span>
-              <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-150" />
-            </button>
-          </div>
-
-          {/* Trust Badges */}
-          <div className="hero-item mt-4 sm:mt-6 flex flex-wrap gap-2 sm:gap-4 items-center justify-center sm:justify-start">
-            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/20">
-              <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 fill-yellow-400" />
-              <span className="text-white text-xs sm:text-sm font-semibold">1000+ Clients</span>
-            </div>
-            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/20">
-              <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-400" />
-              <span className="text-white text-xs sm:text-sm font-semibold">Écologique</span>
-            </div>
-            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/20">
-              <Award className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-400" />
-              <span className="text-white text-xs sm:text-sm font-semibold">100% Satisfaction</span>
-            </div>
-          </div>
-        </div>
-
-        {/* CTA Card - Hidden on mobile, shown on md+ */}
-        <div className="relative w-full mt-4 sm:mt-6 hidden md:block hero-item">
-          <div className="relative group">
-          {/* Glow Effect */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary-500 via-emerald-500 to-cyan-500 rounded-2xl sm:rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition duration-200 animate-gradient" style={{ backgroundSize: '200% 200%' }} />
-            
-            {/* Main Card */}
-            <div className="relative bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-card group-hover:shadow-card-hover transition-all duration-200">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-4 sm:gap-6">
-                {/* Left Side */}
-                <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-4 sm:gap-6">
-                  {/* Icon */}
-                  <div className="relative flex-shrink-0">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary-400 to-emerald-600 rounded-2xl sm:rounded-3xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-200" />
-                    <div className="relative bg-gradient-to-br from-primary-500 to-emerald-600 p-3 sm:p-5 rounded-2xl sm:rounded-3xl shadow-glow">
-                      <Phone size={32} className="text-white sm:hidden" />
-                      <Phone size={40} className="text-white hidden sm:block" />
-                    </div>
-                  </div>
-
-                  {/* Text */}
-                  <div>
-                    <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">
-                      <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-accent-500" />
-                      <span className="text-xs sm:text-sm font-semibold text-accent-600 uppercase tracking-wide">Réponse Rapide</span>
-                    </div>
-                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary-600 to-emerald-600 bg-clip-text text-transparent mb-1">
-                      Appelez-Nous À Tout Moment
-                    </h3>
-                    <p className="text-gray-600 text-xs sm:text-sm md:text-base">
-                      Support 24/7 • Devis instantanés • Services d&apos;urgence
-                    </p>
-                  </div>
-                </div>
-
-                {/* Right Side - CTA */}
-                <div className="flex flex-col gap-2 sm:gap-3 w-full lg:w-auto">
-                  <a
-                  href="tel:+33640604057"
-                    className="group/btn relative px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-primary-500 to-emerald-600 text-white rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg md:text-xl text-center overflow-hidden shadow-glow hover:shadow-glow-lg transition-all duration-200 hover:scale-105"
-                  >
-                    <span className="relative z-10 flex items-center justify-center gap-2">
-                      <Phone className="w-4 h-4 sm:w-5 sm:h-5 group-hover/btn:rotate-12 transition-transform duration-150" />
-                      <span className="hidden sm:inline">+33 6 40 60 40 57</span>
-                      <span className="sm:hidden">Appelez</span>
-                    </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-primary-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-200" />
-                    
-                    {/* Shine effect */}
-                    <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-500 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                  </a>
-
-                  {/* Trust Indicators */}
-                  <div className="flex items-center justify-center lg:justify-start gap-3 sm:gap-4 text-xs sm:text-sm text-gray-700">
-                    <div className="flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-lg">
-                      <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                      <span className="font-bold">Note 4.9/5</span>
-                    </div>
-                    <div className="flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-lg">
-                      <Users className="w-4 h-4 text-primary-500" />
-                      <span className="font-bold">1K+ Clients</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Navigation Arrows - Bottom on mobile, sides on desktop */}
-      {/* Mobile: Bottom centered */}
-      <div className="md:hidden absolute bottom-16 left-0 right-0 z-20 flex justify-center gap-4">
-        <button
-          onClick={prevSlide}
-          className="bg-white/20 hover:bg-white/30 backdrop-blur-md p-3 rounded-full transition-all duration-200 hover:scale-110 group border border-white/30 shadow-lg"
-          aria-label="Previous slide"
+        <a
+          href="tel:+33640604057"
+          className="px-4 py-2 bg-primary-600 text-white text-sm font-bold rounded-xl shadow-lg shadow-primary-600/20"
         >
-          <ChevronLeft className="w-5 h-5 text-white group-hover:-translate-x-1 transition-transform duration-150" />
-        </button>
-
-        <button
-          onClick={nextSlide}
-          className="bg-white/20 hover:bg-white/30 backdrop-blur-md p-3 rounded-full transition-all duration-200 hover:scale-110 group border border-white/30 shadow-lg"
-          aria-label="Next slide"
-        >
-          <ChevronRight className="w-5 h-5 text-white group-hover:translate-x-1 transition-transform duration-150" />
-        </button>
+          Appeler
+        </a>
       </div>
-      
-      {/* Desktop: Left and Right sides */}
-      <button
-        onClick={prevSlide}
-        className="hidden md:block absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 backdrop-blur-md p-4 rounded-full transition-all duration-200 hover:scale-110 group border border-white/30"
-        aria-label="Previous slide"
-      >
-        <ChevronLeft className="w-6 h-6 text-white group-hover:-translate-x-1 transition-transform duration-150" />
-      </button>
-
-      <button
-        onClick={nextSlide}
-        className="hidden md:block absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 backdrop-blur-md p-4 rounded-full transition-all duration-200 hover:scale-110 group border border-white/30"
-        aria-label="Next slide"
-      >
-        <ChevronRight className="w-6 h-6 text-white group-hover:translate-x-1 transition-transform duration-150" />
-      </button>
-
-      {/* Progress Indicators */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-3">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`h-2 rounded-full transition-all duration-200 ${
-              index === currentSlide ? 'w-12 bg-white' : 'w-2 bg-white/50 hover:bg-white/75'
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-            aria-current={index === currentSlide}
-          />
-        ))}
-      </div>
-
-      {/* Floating Elements */}
-      <div className="absolute top-20 right-20 w-20 h-20 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 animate-float hidden lg:block" />
-      <div className="absolute bottom-40 left-32 w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 animate-float hidden lg:block" style={{ animationDelay: '2s' }} />
-    </section>
+    </div>
   );
 }

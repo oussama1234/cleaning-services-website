@@ -150,7 +150,7 @@ export function bookingEmailTemplate(data) {
               <p class="text-white opacity-80" style="margin: 0 0 8px; color: rgba(255,255,255,0.8); font-size: 13px;">115 Avenue Saint Vincent De Paul, Dax</p>
               <p class="text-white opacity-80" style="margin: 0; color: rgba(255,255,255,0.8); font-size: 13px;">
                 <a href="tel:+33640604057" style="color: rgba(255,255,255,0.95); text-decoration: none; font-weight: 500;">+33 6 40 60 40 57</a> • 
-                <a href="mailto:hadri.abdelmoumen@gmail.com" style="color: rgba(255,255,255,0.95); text-decoration: none; font-weight: 500;">hadri.abdelmoumen@gmail.com</a>
+                <a href="mailto:cindelnettoyage@gmail.com" style="color: rgba(255,255,255,0.95); text-decoration: none; font-weight: 500;">cindelnettoyage@gmail.com</a>
               </p>
             </td>
           </tr>
@@ -334,7 +334,7 @@ export function contactEmailTemplate(data) {
               <p class="text-white opacity-80" style="margin: 0 0 8px; color: rgba(255,255,255,0.8); font-size: 13px;">115 Avenue Saint Vincent De Paul, Dax</p>
               <p class="text-white opacity-80" style="margin: 0; color: rgba(255,255,255,0.8); font-size: 13px;">
                 <a href="tel:+33640604057" style="color: rgba(255,255,255,0.95); text-decoration: none; font-weight: 500;">+33 6 40 60 40 57</a> • 
-                <a href="mailto:hadri.abdelmoumen@gmail.com" style="color: rgba(255,255,255,0.95); text-decoration: none; font-weight: 500;">hadri.abdelmoumen@gmail.com</a>
+                <a href="mailto:cindelnettoyage@gmail.com" style="color: rgba(255,255,255,0.95); text-decoration: none; font-weight: 500;">cindelnettoyage@gmail.com</a>
               </p>
             </td>
           </tr>
